@@ -1,0 +1,1 @@
+This report provides a detailed analysis of the HER-2/neu oncogene discovery, its association with breast cancer relapse and survival, and other prognostic factors. The findings highlight the importance of considering multiple factors when assessing prognosis in breast cancer patients.
