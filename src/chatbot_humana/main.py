@@ -17,7 +17,9 @@ def chat():
     """
     st.title("Chat with the Humana Chatbot")
     st.write("Ask me anything about the clinical publications in the knowledge folder.")
-    st.write("For example: 'What is the main idea of the paper?' or 'What is the best-known oncogene in breast cancer?'")
+    st.write(
+        "For example: 'What is the main idea of the paper?' or 'What is the best-known oncogene in breast cancer?'"
+    )
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -36,10 +38,10 @@ def chat():
         with st.chat_message("assisntant"):
             with st.spinner("Thinking..."):
                 inputs = {
-                    'topic': prompt, 
-                    'current_year': str(datetime.now().year),
-                    'user_message': prompt,
-                    'history': "\n".join(st.session_state.history)
+                    "topic": prompt,
+                    "current_year": str(datetime.now().year),
+                    "user_message": prompt,
+                    "history": "\n".join(st.session_state.history),
                 }
                 response = ChatbotHumana().crew().kickoff(inputs=inputs)
                 st.markdown(response)
@@ -47,17 +49,14 @@ def chat():
                 st.session_state.history.append(f"Assistant: {response}")
 
         st.session_state.messages.append({"role": "assistant", "content": response})
-            
+
 
 def run():
     """
     Run the crew.
     """
-    inputs = {
-        'topic': 'AI LLMs',
-        'current_year': str(datetime.now().year)
-    }
-    
+    inputs = {"topic": "AI LLMs", "current_year": str(datetime.now().year)}
+
     try:
         ChatbotHumana().crew().kickoff(inputs=inputs)
     except Exception as e:
@@ -68,15 +67,15 @@ def train():
     """
     Train the crew for a given number of iterations.
     """
-    inputs = {
-        "topic": "AI LLMs",
-        'current_year': str(datetime.now().year)
-    }
+    inputs = {"topic": "AI LLMs", "current_year": str(datetime.now().year)}
     try:
-        ChatbotHumana().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
+        ChatbotHumana().crew().train(
+            n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs
+        )
 
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
+
 
 def replay():
     """
@@ -88,17 +87,17 @@ def replay():
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
 
+
 def test():
     """
     Test the crew execution and returns the results.
     """
-    inputs = {
-        "topic": "AI LLMs",
-        "current_year": str(datetime.now().year)
-    }
-    
+    inputs = {"topic": "AI LLMs", "current_year": str(datetime.now().year)}
+
     try:
-        ChatbotHumana().crew().test(n_iterations=int(sys.argv[1]), eval_llm=sys.argv[2], inputs=inputs)
+        ChatbotHumana().crew().test(
+            n_iterations=int(sys.argv[1]), eval_llm=sys.argv[2], inputs=inputs
+        )
 
     except Exception as e:
         raise Exception(f"An error occurred while testing the crew: {e}")
