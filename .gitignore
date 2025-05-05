@@ -5,3 +5,5 @@ __pycache__/
 .vscode/
 db/
 logs.txt
+.ruff_cache/
+.venv/

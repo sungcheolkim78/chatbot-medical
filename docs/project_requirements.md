@@ -25,4 +25,4 @@ To address this challenge, we propose the following solution:
     - [ ] Documentation: Provide comprehensive documentation of the development process, including code, data sources, and evaluation methods.
     - [ ] Open Source: Share the prototype and related resources on a platform such as GitHub to ensure reproducibility.
 
-By developing this Q/A chatbot prototype, we aim to demonstrate our commitment to innovation and customer-centric solutions. We look forward to reviewing the initial prototype and exploring its potential. Final advice, please make the appropriate assumptions.
+By developing this Q/A chatbot prototype, we aim to demonstrate our commitment to innovation and customer-centric solutions. We look forward to reviewing the initial prototype and exploring its potential. Final advice, please make the appropriate assumptions. 
