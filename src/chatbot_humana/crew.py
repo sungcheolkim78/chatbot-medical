@@ -31,7 +31,6 @@ class ChatbotHumana:
     def researcher(self) -> Agent:
         return Agent(
             config=self.agents_config["researcher"],  # type: ignore[index]
-            knowledge_sources=[self.pdf_source],
             verbose=False,
         )
 
@@ -39,13 +38,7 @@ class ChatbotHumana:
     def reporting_analyst(self) -> Agent:
         return Agent(
             config=self.agents_config["reporting_analyst"],  # type: ignore[index]
-            verbose=False,
-        )
-
-    @agent
-    def assistant(self) -> Agent:
-        return Agent(
-            config=self.agents_config["assistant"],  # type: ignore[index]
+            knowledge_sources=[self.pdf_source],
             verbose=False,
         )
 
@@ -57,6 +50,13 @@ class ChatbotHumana:
             verbose=False,
         )
 
+    @agent
+    def assistant(self) -> Agent:
+        return Agent(
+            config=self.agents_config["assistant"],  # type: ignore[index]
+            verbose=False,
+        )
+
     # To learn more about structured task outputs,
     # task dependencies, and task callbacks, check out the documentation:
     # https://docs.crewai.com/concepts/tasks#overview-of-a-task
@@ -64,25 +64,28 @@ class ChatbotHumana:
     def research_task(self) -> Task:
         return Task(
             config=self.tasks_config["research_task"],  # type: ignore[index]
+            output_file="logs/research.md",
         )
 
     @task
     def reporting_task(self) -> Task:
         return Task(
             config=self.tasks_config["reporting_task"],  # type: ignore[index]
-            output_file="report.md",
-        )
-
-    @task
-    def chat_task(self) -> Task:
-        return Task(
-            config=self.tasks_config["chat_task"],  # type: ignore[index]
+            output_file="logs/report.md",
         )
 
     @task
     def fact_check_task(self) -> Task:
         return Task(
             config=self.tasks_config["fact_check_task"],  # type: ignore[index]
+            output_file="logs/fact_check.md",
+        )
+
+    @task
+    def chat_task(self) -> Task:
+        return Task(
+            config=self.tasks_config["chat_task"],  # type: ignore[index]
+            output_file="logs/chat.md",
         )
 
     @crew
@@ -95,7 +98,7 @@ class ChatbotHumana:
             agents=self.agents,  # Automatically created by the @agent decorator
             tasks=self.tasks,  # Automatically created by the @task decorator
             process=Process.sequential,
-            verbose=True,
+            verbose=False,
             # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
             output_log_file=True,
         )

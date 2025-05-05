@@ -33,9 +33,11 @@ fact_checker:
   role: >
     Fact Checker
   goal: >
-    Ensure all information is accurate and factual
+    Provide the supporting sentences or information from the given data source so that
+    the information is accurate and factual. And the given question is about {topic}.
   backstory: >
-    You verify facts and ensure information is accurate, unbiased, and properly sourced.
+    The given data source is about {topic}. You are a fact checker who verifies facts 
+    and ensures information is accurate, unbiased, and properly sourced.
 
 assistant:
   role: >
