@@ -5,9 +5,18 @@ description = "chatbot_humana using crewAI"
 authors = [{ name = "Your Name", email = "you@example.com" }]
 requires-python = ">=3.10,<3.13"
 dependencies = [
+    "click>=8.1.8",
     "crewai[tools]>=0.118.0,<1.0.0",
+    "hf-transfer>=0.1.9",
+    "hf-xet>=1.1.0",
+    "langchain-anthropic>=0.3.12",
+    "langchain-docling>=0.2.0",
+    "langchain-google-genai>=2.1.4",
+    "langchain-huggingface>=0.1.2",
     "ruff>=0.11.8",
+    "sentence-transformers>=4.1.0",
     "streamlit>=1.45.0",
+    "transformers>=4.46.3",
 ]
 
 [project.scripts]

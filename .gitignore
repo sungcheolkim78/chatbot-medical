@@ -7,3 +7,4 @@ db/
 logs.txt
 .ruff_cache/
 .venv/
+*.log
