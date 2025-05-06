@@ -7,5 +7,8 @@ format:
 app:
 	streamlit run src/chatbot_humana/main.py
 
+eval:
+	streamlit run evaluation/eval.py
+
 dataset:
 	python evaluation/dataset_generator.py

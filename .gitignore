@@ -8,3 +8,4 @@ logs.txt
 .ruff_cache/
 .venv/
 *.log
+*/datasets/dataset_*.json

@@ -10,6 +10,7 @@ from .models import Difficulty, Confidence, LLMType
 from .llm_manager import LLMManager
 from .document_loader import DocumentLoader
 
+#    "source": "[exact quote from the excerpt that contains the answer]"
 
 class QAGenerator:
     def __init__(self, document_loader: DocumentLoader, llm_manager: LLMManager):
@@ -30,13 +31,14 @@ class QAGenerator:
             context = self.document_loader.get_random_context(num_chunks=2)
 
             # Generate question and answer using the LLM
-            qa_prompt = f"""You are a scientific paper question generator. Your task is to create a question and answer pair based on the given excerpt.
+            qa_prompt = f"""You are a medical doctor specializing in breast cancer and oncogene research. 
+Your task is to create a question and answer pair based on the given excerpt.
 
 Paper excerpt:
 {context}
 
 Instructions:
-1. Generate a {self.difficulty.value} level question and answer pair
+1. Generate a {self.difficulty.value} level question and answer pair. Difficulty level is based on the target audience with different levels of knowledge.
 2. The question must be answerable from the given excerpt
 3. Include specific quotes or data from the excerpt in the answer
 4. Format your response EXACTLY as shown in the example below
@@ -45,7 +47,7 @@ Example format:
 {{
     "question": "What is the specific finding about X described in the excerpt?",
     "answer": "According to the excerpt, the study found that X has Y effect. Specifically, the paper states: '[direct quote from text]'. This demonstrates that...",
-    "source": "[exact quote from the excerpt that contains the answer]"
+    "source": "{context}"
 }}
 
 IMPORTANT: 

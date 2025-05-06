@@ -38,6 +38,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 import time
 import click
+import random
 
 from src import (
     Difficulty,
@@ -87,6 +88,10 @@ class DatasetGenerator:
     def process_combination(self, llm_type: LLMType, difficulty: Difficulty, num_questions: int) -> None:
         """Process a single LLM-difficulty combination."""
         try:
+            # Set a unique random seed for this thread based on LLM type and difficulty
+            thread_seed = hash(f"{llm_type.value}_{difficulty.value}_{time.time()}")
+            random.seed(thread_seed)
+            
             logging.info(f"Processing: {llm_type.value} - {difficulty.value}")
             
             # Set up LLM and difficulty

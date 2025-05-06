@@ -52,14 +52,38 @@ class DocumentLoader:
             raise
 
     def get_random_context(self, num_chunks: int = 2) -> str:
-        """Get random chunks of text from the paper for context."""
+        """Get random chunks of text from the paper for context, including adjacent chunks for continuity."""
         if not self.paper_content:
             raise ValueError("Paper content not loaded")
 
-        # Select random chunks
-        selected_chunks = random.sample(
-            self.paper_content, min(num_chunks, len(self.paper_content))
-        )
+        # Select a random starting chunk
+        start_idx = random.randint(0, len(self.paper_content) - 1)
+        
+        # Calculate the range of chunks to include
+        # For num_chunks=2, we'll get the selected chunk and one adjacent chunk
+        # For num_chunks=3, we'll get the selected chunk and both adjacent chunks
+        chunks_to_get = []
+        
+        if num_chunks == 2:
+            # Get the selected chunk and either previous or next chunk
+            chunks_to_get.append(start_idx)
+            if start_idx > 0 and random.random() < 0.5:
+                chunks_to_get.append(start_idx - 1)  # Previous chunk
+            elif start_idx < len(self.paper_content) - 1:
+                chunks_to_get.append(start_idx + 1)  # Next chunk
+        else:
+            # Get the selected chunk and both adjacent chunks if available
+            chunks_to_get = [start_idx]
+            if start_idx > 0:
+                chunks_to_get.append(start_idx - 1)  # Previous chunk
+            if start_idx < len(self.paper_content) - 1:
+                chunks_to_get.append(start_idx + 1)  # Next chunk
+
+        # Sort chunks to maintain original order
+        chunks_to_get.sort()
+        
+        # Get the selected chunks
+        selected_chunks = [self.paper_content[i] for i in chunks_to_get]
 
         # Combine the chunks and their surrounding context
         context_texts = []
@@ -70,5 +94,5 @@ class DocumentLoader:
             context_texts.append(f"[Page {page_num}] {chunk.page_content}")
 
         context = "\n\n".join(context_texts)
-        logging.debug(f"Selected random context from {len(selected_chunks)} chunks")
+        logging.debug(f"Selected context from {len(selected_chunks)} chunks")
         return context 
