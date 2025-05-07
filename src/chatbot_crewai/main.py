@@ -5,7 +5,7 @@ import streamlit as st
 
 from datetime import datetime
 
-from chatbot_humana.crew import ChatbotHumana
+from chatbot_crewai.crew import ChatbotHumana
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 

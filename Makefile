@@ -4,8 +4,8 @@ lint:
 format:
 	ruff format src evaluation
 
-app:
-	streamlit run src/chatbot_humana/main.py
+app_crewai:
+	streamlit run src/chatbot_crewai/main.py
 
 eval:
 	streamlit run evaluation/eval.py

@@ -13,6 +13,7 @@ import re
 
 def setup_logging() -> None:
     """Set up logging configuration."""
+
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     log_dir = Path("logs")
     log_dir.mkdir(exist_ok=True)
@@ -20,7 +21,7 @@ def setup_logging() -> None:
     # Configure logging to both file and console
     logging.basicConfig(
         level=logging.INFO,
-        format="%(asctime)s - %(levelname)s - %(message)s",
+        format="%(asctime)s|%(levelname)s|%(message)s",
         handlers=[
             logging.FileHandler(log_dir / f"dataset_generator_{timestamp}.log"),
             logging.StreamHandler(),
@@ -84,4 +85,4 @@ def preprocess_text(text: str) -> str:
     # Fix spaces around hyphens in compound words
     processed = re.sub(r"\s*-\s*", "-", processed)
 
-    return processed.strip() 
+    return processed.strip()

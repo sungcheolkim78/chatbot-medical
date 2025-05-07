@@ -4,13 +4,12 @@ Question and Answer generation functionality for the dataset generator.
 
 import json
 import logging
-from typing import Dict, Optional
+from typing import Dict
 
-from .models import Difficulty, Confidence, LLMType
+from .models import Difficulty, Confidence
 from .llm_manager import LLMManager
 from .document_loader import DocumentLoader
 
-#    "source": "[exact quote from the excerpt that contains the answer]"
 
 class QAGenerator:
     def __init__(self, document_loader: DocumentLoader, llm_manager: LLMManager):
@@ -20,12 +19,13 @@ class QAGenerator:
 
     def set_difficulty(self, difficulty: Difficulty) -> None:
         """Set the difficulty level for question generation."""
+
         self.difficulty = difficulty
         logging.info(f"Set difficulty level to: {difficulty}")
 
     def generate_qa_pair(self) -> Dict[str, str]:
         """Generate a question-answer pair based on random portions of the paper content."""
-        logging.debug("Generating question-answer pair...")
+
         try:
             # Get random context from the paper
             context = self.document_loader.get_random_context(num_chunks=2)
@@ -45,9 +45,9 @@ Instructions:
 
 Example format:
 {{
-    "question": "What is the specific finding about X described in the excerpt?",
+    "question": "What is the specific finding about X described in the excerpt? if necessary, add short description to the keywords.",
     "answer": "According to the excerpt, the study found that X has Y effect. Specifically, the paper states: '[direct quote from text]'. This demonstrates that...",
-    "source": "{context}"
+    "source": "[exact quote from the excerpt that contains the answer]"
 }}
 
 IMPORTANT: 
@@ -119,7 +119,7 @@ IMPORTANT:
 
     def check_answer_confidence(self, answer: str, source: str) -> Confidence:
         """Check the confidence of the generated answer against the source."""
-        logging.debug("Checking answer confidence...")
+
         try:
             confidence_prompt = f"""
             Compare the following answer with the source text and rate the confidence level (low, medium, high):
@@ -142,8 +142,8 @@ IMPORTANT:
                 response.content if hasattr(response, "content") else str(response)
             )
             confidence = confidence.strip().lower()
-            logging.debug(f"Confidence level: {confidence}")
+
             return Confidence(confidence)
         except Exception as e:
             logging.error(f"Error checking confidence: {str(e)}")
-            raise 
+            raise

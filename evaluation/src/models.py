@@ -1,3 +1,4 @@
+# Copyright 2025 Sungcheol Kim, All rights reserved.
 """
 Data models and enums for the dataset generator.
 """
@@ -21,10 +22,12 @@ class Confidence(str, Enum):
 
 
 class LLMType(str, Enum):
-    GPT4_MINI = "gpt-4o-mini"
-    CLAUDE_35 = "claude-3-opus-20240229"
-    CLAUDE_37 = "claude-3-sonnet-20240229"
-    GEMINI_15_PRO = "gemini-1.5-pro"
+    GPT4O_MINI = "gpt-4o-mini"
+    # CLAUDE_3 = "claude-3-sonnet-20240229"
+    CLAUDE_35_SONNET = "claude-3-5-sonnet-20240620"
+    # GEMINI_15_PRO = "gemini-1.5-pro"
+    # GEMINI_20_FLASH = "gemini-2.0-flash"
+    GEMINI_25_FLASH = "gemini-2.5-flash-preview-04-17"
 
 
 @dataclass
@@ -37,6 +40,7 @@ class ProgressStats:
     def get_progress_str(self) -> str:
         completed = len(self.completed)
         elapsed_time = time.time() - self.start_time
+
         if completed > 0:
             avg_time_per_item = elapsed_time / completed
             estimated_remaining = avg_time_per_item * (
@@ -49,4 +53,5 @@ class ProgressStats:
                 f"Estimated remaining: {estimated_remaining:.1f}s | "
                 f"Failed attempts: {sum(self.failed.values())}"
             )
-        return f"Progress: 0/{self.total_combinations} combinations" 
+
+        return f"Progress: 0/{self.total_combinations} combinations"
