@@ -9,3 +9,4 @@ logs.txt
 .venv/
 *.log
 */datasets/dataset_*.json
+*.cache
