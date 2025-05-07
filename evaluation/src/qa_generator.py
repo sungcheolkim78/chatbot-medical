@@ -16,6 +16,7 @@ class QAGenerator:
         self.document_loader = document_loader
         self.llm_manager = llm_manager
         self.difficulty = None
+        self.num_chunks = 1
 
     def set_difficulty(self, difficulty: Difficulty) -> None:
         """Set the difficulty level for question generation."""
@@ -28,7 +29,7 @@ class QAGenerator:
 
         try:
             # Get random context from the paper
-            context = self.document_loader.get_random_context(num_chunks=2)
+            context = self.document_loader.get_random_context(num_chunks=self.num_chunks)
 
             # Generate question and answer using the LLM
             qa_prompt = f"""You are a medical doctor specializing in breast cancer and oncogene research. 
@@ -43,10 +44,15 @@ Instructions:
 3. Include specific quotes or data from the excerpt in the answer
 4. Format your response EXACTLY as shown in the example below
 
-Example format:
+Example formats:
 {{
-    "question": "What is the specific finding about X described in the excerpt? if necessary, add short description to the keywords.",
+    "question": "What is the specific finding about X described in the excerpt?",
     "answer": "According to the excerpt, the study found that X has Y effect. Specifically, the paper states: '[direct quote from text]'. This demonstrates that...",
+    "source": "[exact quote from the excerpt that contains the answer]"
+}}
+{{
+    "question": "What is the definition of X described in the excerpt?",
+    "answer": "X is defined as Y in the excerpt. Specifically, the paper states: '[direct quote from text]'. This demonstrates that...",
     "source": "[exact quote from the excerpt that contains the answer]"
 }}
 

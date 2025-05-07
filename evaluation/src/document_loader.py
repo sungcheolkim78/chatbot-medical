@@ -7,28 +7,197 @@ import random
 import os
 import pickle
 from pathlib import Path
+from typing import List, Optional, Protocol
+from abc import ABC, abstractmethod
 
 from langchain_docling import DoclingLoader
 from langchain_unstructured import UnstructuredLoader
-from langchain_community.document_loaders import PDFMinerLoader
+from langchain_community.document_loaders import PDFMinerLoader, UnstructuredMarkdownLoader
 from langchain.text_splitter import (
     RecursiveCharacterTextSplitter,
     SentenceTransformersTokenTextSplitter,
 )
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
+from langchain.schema import Document
 
 from .utils import preprocess_text
 
 
+class DocumentLoaderStrategy(Protocol):
+    """Strategy interface for document loading."""
+    def load(self) -> List[Document]:
+        """Load documents from a source."""
+        pass
+
+
+class DoclingLoaderStrategy(DocumentLoaderStrategy):
+    def __init__(self, file_path: str):
+        self.file_path = file_path
+        self.loader = DoclingLoader(file_path=file_path)
+
+    def load(self) -> List[Document]:
+        return self.loader.load()
+
+
+class UnstructuredLoaderStrategy(DocumentLoaderStrategy):
+    def __init__(self, file_path: str):
+        self.file_path = file_path
+        self.loader = UnstructuredLoader(
+            file_path=file_path,
+            strategy="hi_res",
+            partition_via_api=True,
+            coordinates=True,
+        )
+
+    def load(self) -> List[Document]:
+        return self.loader.load()
+
+
+class PDFMinerLoaderStrategy(DocumentLoaderStrategy):
+    def __init__(self, file_path: str):
+        self.file_path = file_path
+        self.loader = PDFMinerLoader(file_path=file_path)
+
+    def load(self) -> List[Document]:
+        return self.loader.load()
+
+
+class UnstructuredMarkdownLoaderStrategy(DocumentLoaderStrategy):
+    def __init__(self, file_path: str):
+        self.file_path = file_path
+        self.loader = UnstructuredMarkdownLoader(file_path=file_path)
+
+    def load(self) -> List[Document]:
+        return self.loader.load()
+
+
+class TextSplitterStrategy(Protocol):
+    """Strategy interface for text splitting."""
+    def split_documents(self, documents: List[Document]) -> List[Document]:
+        """Split documents into chunks."""
+        pass
+
+
+class RecursiveCharacterSplitterStrategy(TextSplitterStrategy):
+    def split_documents(self, documents: List[Document]) -> List[Document]:
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=500, chunk_overlap=10
+        )
+        return splitter.split_documents(documents)
+
+
+class SentenceTransformersSplitterStrategy(TextSplitterStrategy):
+    def split_documents(self, documents: List[Document]) -> List[Document]:
+        splitter = SentenceTransformersTokenTextSplitter(
+            tokens_per_chunk=150, chunk_overlap=3
+        )
+        return splitter.split_documents(documents)
+
+
+class DocumentLoaderFactory:
+    """Factory for creating document loaders and text splitters."""
+    
+    # Mapping of file extensions to loader types
+    EXTENSION_TO_LOADER = {
+        ".md": "markdown",
+        ".pdf": "pdfminer",  # Default PDF loader
+    }
+    
+    # Mapping of loader types to strategy classes
+    LOADER_STRATEGIES = {
+        "docling": DoclingLoaderStrategy,
+        "unstructured": UnstructuredLoaderStrategy,
+        "pdfminer": PDFMinerLoaderStrategy,
+        "markdown": UnstructuredMarkdownLoaderStrategy
+    }
+    
+    @classmethod
+    def create_document_loader(cls, loader_type: str, file_path: str) -> DocumentLoaderStrategy:
+        """Create a document loader based on type and file path."""
+        # If loader_type is not specified, try to determine from file extension
+        if not loader_type:
+            file_extension = Path(file_path).suffix.lower()
+            loader_type = cls.EXTENSION_TO_LOADER.get(file_extension, "unstructured")
+            logging.info(f"Auto-detected loader type: {loader_type}")
+        
+        if loader_type not in cls.LOADER_STRATEGIES:
+            raise ValueError(f"Invalid loader type: {loader_type}")
+        
+        return cls.LOADER_STRATEGIES[loader_type](file_path)
+
+    @staticmethod
+    def create_text_splitter(splitter_type: str) -> TextSplitterStrategy:
+        splitters = {
+            "recursive_character": RecursiveCharacterSplitterStrategy,
+            "sentence_transformers_token": SentenceTransformersSplitterStrategy
+        }
+        if splitter_type not in splitters:
+            raise ValueError(f"Invalid text splitter type: {splitter_type}")
+        return splitters[splitter_type]()
+
+
+class CacheStrategy(Protocol):
+    """Strategy interface for caching."""
+    def save(self, content: List[Document]) -> None:
+        """Save content to cache."""
+        pass
+
+    def load(self) -> Optional[List[Document]]:
+        """Load content from cache."""
+        pass
+
+
+class FileCacheStrategy(CacheStrategy):
+    def __init__(self, cache_file: str):
+        self.cache_file = cache_file
+
+    def save(self, content: List[Document]) -> None:
+        try:
+            with open(self.cache_file, "wb") as f:
+                pickle.dump(content, f)
+            logging.info(f"Saved paper content to cache file: {self.cache_file}")
+        except Exception as e:
+            logging.error(f"Failed to save cache file: {str(e)}")
+
+    def load(self) -> Optional[List[Document]]:
+        if os.path.exists(self.cache_file):
+            try:
+                with open(self.cache_file, "rb") as f:
+                    return pickle.load(f)
+            except Exception as e:
+                logging.warning(f"Failed to load cache file: {str(e)}")
+        return None
+
+
+class MemoryCacheStrategy(CacheStrategy):
+    def __init__(self, cache: dict):
+        self.cache = cache
+        self.key = None
+
+    def set_key(self, key: str):
+        self.key = key
+
+    def save(self, content: List[Document]) -> None:
+        if self.key:
+            self.cache[self.key] = content
+
+    def load(self) -> Optional[List[Document]]:
+        if self.key and self.key in self.cache:
+            return self.cache[self.key]
+        return None
+
+
 class DocumentLoader:
+    """Template class for document loading and processing."""
+
     # Class-level cache for paper content
     _paper_content_cache = {}
 
     def __init__(
         self,
         file_path: str,
-        pdf_loader_type: str = "unstructured",
+        pdf_loader_type: str = None,  # Made optional to allow auto-detection
         text_splitter_type: str = "sentence_transformers_token",
     ):
         self.file_path = file_path
@@ -36,12 +205,24 @@ class DocumentLoader:
         self.vectorstore = None
         self.pdf_loader_type = pdf_loader_type
         self.text_splitter_type = text_splitter_type
-        self.need_vectorstore = False  # This is for the chatbot
-        self.cache_file = self._get_cache_file_path()
+        self.need_vectorstore = False
+
+        # Initialize strategies
+        self.document_loader = DocumentLoaderFactory.create_document_loader(
+            pdf_loader_type, file_path
+        )
+        self.text_splitter = DocumentLoaderFactory.create_text_splitter(
+            text_splitter_type
+        )
+        
+        # Initialize cache strategies
+        cache_file = self._get_cache_file_path()
+        self.file_cache = FileCacheStrategy(cache_file)
+        self.memory_cache = MemoryCacheStrategy(self._paper_content_cache)
+        self.memory_cache.set_key(file_path)
 
     def _get_cache_file_path(self) -> str:
         """Get the path for the cache file."""
-
         file_path = Path(self.file_path)
         return str(
             file_path.with_stem(
@@ -49,105 +230,68 @@ class DocumentLoader:
             ).with_suffix(".cache")
         )
 
-    def _load_from_cache_file(self) -> bool:
-        """Load content from cache file if it exists."""
+    def _preprocess_documents(self, documents: List[Document]) -> List[Document]:
+        """Preprocess the text content of each document."""
+        for doc in documents:
+            if self.pdf_loader_type != "markdown":
+                doc.page_content = preprocess_text(doc.page_content)
+            logging.debug(f"Preprocessed text sample: {doc.page_content[:200]}...")
+        return documents
 
-        if os.path.exists(self.cache_file):
-            try:
-                with open(self.cache_file, "rb") as f:
-                    self.paper_content = pickle.load(f)
-                logging.info(f"Loaded paper content from cache file: {self.cache_file}")
-                return True
-            except Exception as e:
-                logging.warning(f"Failed to load cache file: {str(e)}")
-        return False
+    def _create_vector_store(self) -> None:
+        """Create vector store for similarity search if needed."""
+        if not self.need_vectorstore:
+            return
 
-    def _save_to_cache_file(self) -> None:
-        """Save content to cache file."""
-        try:
-            with open(self.cache_file, "wb") as f:
-                pickle.dump(self.paper_content, f)
-            logging.info(f"Saved paper content to cache file: {self.cache_file}")
-        except Exception as e:
-            logging.error(f"Failed to save cache file: {str(e)}")
+        logging.info("... Creating vector store")
+        embeddings = HuggingFaceEmbeddings()
+        self.vectorstore = FAISS.from_documents(self.paper_content, embeddings)
+        logging.info("... Vector store creation completed")
 
     def load_paper(self) -> None:
-        """Load and process the paper content."""
-
+        """Template method for loading and processing paper content."""
         logging.info("Loading paper content...")
 
         try:
-            # First try to load from cache file
-            if self._load_from_cache_file():
-                pass
-            # Then check memory cache
-            elif self.file_path in self._paper_content_cache:
+            # Try loading from cache first
+            if cached_content := self.file_cache.load():
+                self.paper_content = cached_content
+                return
+            
+            # Check memory cache
+            if cached_content := self.memory_cache.load():
                 logging.info("Using cached paper content from memory")
-                self.paper_content = self._paper_content_cache[self.file_path]
-            else:
-                # TODO: Try different loaders
-                # - PyPDFLoader
-                # - Use multimodal models
-                if self.pdf_loader_type == "docling":
-                    loader = DoclingLoader(file_path=self.file_path)
-                elif self.pdf_loader_type == "unstructured":
-                    loader = UnstructuredLoader(
-                        file_path=self.file_path,
-                        strategy="hi_res",
-                        partition_via_api=True,
-                        coordinates=True,
-                    )
-                elif self.pdf_loader_type == "pdfminer":
-                    loader = PDFMinerLoader(file_path=self.file_path)
-                else:
-                    raise ValueError(f"Invalid PDF loader type: {self.pdf_loader_type}")
+                self.paper_content = cached_content
+                return
 
-                pages = loader.load()
-                logging.info(f"Successfully loaded {len(pages)} pages from the paper")
-
-                # Preprocess text content of each page
-                for page in pages:
-                    page.page_content = preprocess_text(page.page_content)
-                    logging.debug(
-                        f"Preprocessed text sample: {page.page_content[:200]}..."
-                    )
-
-                # TODO: Try more different splitters
-                # - SemanticChunker
-                # - SentenceTransformersTokenTextSplitter
-                # - CharacterTextSplitter.from_huggingface_tokenizer
-                if self.text_splitter_type == "recursive_character":
-                    text_splitter = RecursiveCharacterTextSplitter(
-                        chunk_size=1000, chunk_overlap=10
-                    )
-                elif self.text_splitter_type == "sentence_transformers_token":
-                    text_splitter = SentenceTransformersTokenTextSplitter(
-                        tokens_per_chunk=350, chunk_overlap=10
-                    )
-                self.paper_content = text_splitter.split_documents(pages)
-
-                # Store in memory cache
-                self._paper_content_cache[self.file_path] = self.paper_content
-                # Save to cache file
-                self._save_to_cache_file()
-
-                logging.info(
-                    f"... Split paper into {len(self.paper_content)} chunks and cached"
-                )
-
-            # Create vector store for similarity search
-            # TODO: This is not needed for the dataset generator
-            if self.need_vectorstore:
-                logging.info("... Creating vector store")
-                embeddings = HuggingFaceEmbeddings()
-                self.vectorstore = FAISS.from_documents(self.paper_content, embeddings)
-                logging.info("... Vector store creation completed")
+            # Load and process documents
+            self._load_and_process_documents()
 
         except Exception as e:
             logging.error(f"Error loading paper: {str(e)}")
             raise
 
-    def get_random_context(self, num_chunks: int = 2) -> str:
+    def _load_and_process_documents(self) -> None:
+        """Load and process documents using the selected strategies."""
+        # Load documents
+        pages = self.document_loader.load()
+        logging.info(f"Successfully loaded {len(pages)} pages from the paper")
+
+        # Preprocess documents
+        pages = self._preprocess_documents(pages)
+
+        # Split documents
+        self.paper_content = self.text_splitter.split_documents(pages)
+        logging.info(f"... Split paper into {len(self.paper_content)} chunks")
+
+        # Cache the results
+        self.memory_cache.save(self.paper_content)
+        self.file_cache.save(self.paper_content)
+
+        # Create vector store if needed
+        self._create_vector_store()
+
+    def get_random_context(self, num_chunks: int = 1) -> str:
         """Get random chunks of text from the paper for context, including adjacent chunks for continuity."""
 
         if not self.paper_content:
@@ -157,20 +301,19 @@ class DocumentLoader:
         start_idx = random.randint(0, len(self.paper_content) - 1)
 
         # Calculate the range of chunks to include
+        # For num_chunks=1, we'll get the selected chunk
         # For num_chunks=2, we'll get the selected chunk and one adjacent chunk
         # For num_chunks=3, we'll get the selected chunk and both adjacent chunks
-        chunks_to_get = []
+        chunks_to_get = [start_idx]
 
         if num_chunks == 2:
             # Get the selected chunk and either previous or next chunk
-            chunks_to_get.append(start_idx)
             if start_idx > 0 and random.random() < 0.5:
                 chunks_to_get.append(start_idx - 1)  # Previous chunk
             elif start_idx < len(self.paper_content) - 1:
                 chunks_to_get.append(start_idx + 1)  # Next chunk
-        else:
+        elif num_chunks == 3:
             # Get the selected chunk and both adjacent chunks if available
-            chunks_to_get = [start_idx]
             if start_idx > 0:
                 chunks_to_get.append(start_idx - 1)  # Previous chunk
             if start_idx < len(self.paper_content) - 1:

@@ -11,7 +11,7 @@ def load_dataset(file_path):
 
 def get_dataset_files():
     dataset_dir = "evaluation/datasets"
-    return [f for f in os.listdir(dataset_dir) if f.endswith(".json")]
+    return sorted([f for f in os.listdir(dataset_dir) if f.endswith(".json")])
 
 
 def format_timestamp(timestamp):

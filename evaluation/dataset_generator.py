@@ -56,8 +56,8 @@ class DatasetGenerator:
         # Initialize components
         self.document_loader = DocumentLoader(
             paper_path,
-            pdf_loader_type="pdfminer",
-            text_splitter_type="recursive_character",
+            pdf_loader_type=None,
+            text_splitter_type="sentence_transformers_token",
         )
         self.llm_manager = LLMManager(check_api_keys())
         self.qa_generator = QAGenerator(self.document_loader, self.llm_manager)
@@ -147,7 +147,7 @@ class DatasetGenerator:
 @click.option(
     "--paper-path",
     type=click.Path(exists=True),
-    default="knowledge/slamon1987_short.pdf",
+    default="knowledge/slamon1987_claude.md",
     help="Path to the paper PDF file",
 )
 @click.option(
