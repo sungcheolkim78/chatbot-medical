@@ -29,7 +29,9 @@ class QAGenerator:
 
         try:
             # Get random context from the paper
-            context = self.document_loader.get_random_context(num_chunks=self.num_chunks)
+            context = self.document_loader.get_random_context(
+                num_chunks=self.num_chunks
+            )
 
             # Generate question and answer using the LLM
             qa_prompt = f"""You are a medical doctor specializing in breast cancer and oncogene research. 

@@ -1,4 +1,4 @@
-# Human Breast Cancer: Correlation of Relapse and Survival with Amplification of the HER-2/neu Oncogene
+## Human Breast Cancer: Correlation of Relapse and Survival with Amplification of the HER-2/neu Oncogene
 
 **Authors:** Dennis J. Slamon, Gary M. Clark, Steven G. Wong, Wendy J. Levin, Axel Ullrich, William L. McGuire
 

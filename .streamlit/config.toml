@@ -1,0 +1,9 @@
+[server]
+fileWatcherType = "poll"
+
+[server.fileWatcher]
+excludePatterns = [
+    "**/torch/**",
+    "**/torchvision/**",
+    "**/torchaudio/**"
+] 

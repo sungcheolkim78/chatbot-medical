@@ -7,6 +7,9 @@ format:
 app_crewai:
 	streamlit run src/chatbot_crewai/main.py
 
+app_langchain:
+	streamlit run src/chatbot_langchain/app.py
+
 eval:
 	streamlit run evaluation/eval.py
 

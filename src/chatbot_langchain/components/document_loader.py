@@ -205,13 +205,14 @@ class DocumentLoader:
         file_path: str,
         pdf_loader_type: str = None,  # Made optional to allow auto-detection
         text_splitter_type: str = "sentence_transformers_token",
+        need_vectorstore: bool = True,
     ):
         self.file_path = file_path
         self.paper_content = None
         self.vectorstore = None
         self.pdf_loader_type = pdf_loader_type
         self.text_splitter_type = text_splitter_type
-        self.need_vectorstore = False
+        self.need_vectorstore = need_vectorstore
 
         # Initialize strategies
         self.document_loader = DocumentLoaderFactory.create_document_loader(
@@ -262,16 +263,19 @@ class DocumentLoader:
             # Try loading from cache first
             if cached_content := self.file_cache.load():
                 self.paper_content = cached_content
+                self._create_vector_store()
                 return
 
             # Check memory cache
             if cached_content := self.memory_cache.load():
                 logging.info("Using cached paper content from memory")
                 self.paper_content = cached_content
+                self._create_vector_store()
                 return
 
             # Load and process documents
             self._load_and_process_documents()
+            self._create_vector_store()
 
         except Exception as e:
             logging.error(f"Error loading paper: {str(e)}")
@@ -293,9 +297,6 @@ class DocumentLoader:
         # Cache the results
         self.memory_cache.save(self.paper_content)
         self.file_cache.save(self.paper_content)
-
-        # Create vector store if needed
-        self._create_vector_store()
 
     def get_random_context(self, num_chunks: int = 1) -> str:
         """Get random chunks of text from the paper for context, including adjacent chunks for continuity."""
