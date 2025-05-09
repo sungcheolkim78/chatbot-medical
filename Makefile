@@ -4,22 +4,22 @@ lint:
 format:
 	ruff format src evaluation
 
-app_crewai:
+chatbot_crewai:
 	streamlit run src/chatbot_crewai/main.py
 
-app_langchain:
+chatbot_langchain:
 	streamlit run src/chatbot_langchain/app.py
 
-eval:
+eval_app:
 	streamlit run evaluation/eval.py
 
-dataset:
+eval_dataset:
 	python evaluation/dataset_generator.py
 
-batch:
+eval_batch:
 	python src/chatbot_langchain/batch.py --config evaluation/configs/batch_config.yaml
 	python evaluation/llm_scorer.py --config evaluation/configs/batch_config.yaml
 	python evaluation/score_plot.py
 
-plot:
+eval_plot:
 	python evaluation/score_plot.py

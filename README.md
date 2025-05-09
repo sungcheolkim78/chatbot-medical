@@ -1,4 +1,4 @@
-# Chatbot Humana
+# Medical Chatbot 
 
 A sophisticated chatbot implementation offering two versions: one using CrewAI for advanced agent-based interactions and another using LangChain for flexible chain-based conversations.
 
@@ -29,7 +29,6 @@ Both systems are built with modern AI technologies and provide robust frameworks
 
 ### Common Features
 - Comprehensive evaluation framework
-- Training and testing capabilities
 - Web interface support
 - Knowledge base integration
 
@@ -54,24 +53,24 @@ pip install -r requirements.txt
 
 ## Usage
 
-The project provides several command-line interfaces for both versions:
-
-### CrewAI Version
-- `chatbot_humana`: Main CrewAI chatbot interface
-- `run_crew`: Run the CrewAI-based chat system
+The project provides several command-line interfaces for both versions via Makefile:
 
 ### LangChain Version
-- `langchain_chat`: Main LangChain chatbot interface
-- `train_langchain`: Train the LangChain model
-- `test_langchain`: Run LangChain tests
+- `chatbot_langchain`: Main LangChain chatbot interface
+- `eval_dataset`: Generate the question/answer dataset from the knowledge base
+- `eval_app`: Web application to view the evaluation dataset
+- `eval_batch`: Generate chatbot conversation based on the evaluation dataset and create the score using judge LLM
+
+### CrewAI Version
+- `chatbot_crewai`: Main CrewAI chatbot interface
 
 To start either version:
 ```bash
-# For CrewAI version
-python -m chatbot_humana.main
-
 # For LangChain version
-python -m chatbot_humana.langchain_main
+make chatbot_langchain # or python src/chatbot_langchain/app.py
+
+# For CrewAI version
+make chatbot_crewai # or python src/chatbot_crewai/main.py
 ```
 
 ## Key Evaluation Metrics
@@ -79,56 +78,27 @@ python -m chatbot_humana.langchain_main
 The evaluation framework includes several key metrics for both versions:
 
 1. Response Quality
-   - Relevance
-   - Coherence
-   - Accuracy
-   - Completeness
+   - [x] Relevance
+   - [x] Coherence
+   - [x] Accuracy
 
 2. Performance Metrics
-   - Response Time
-   - Resource Utilization
-   - Error Rates
+   - [x] Response Time
+   - [ ] Resource Utilization
+   - [ ] Error Rates
 
 3. User Experience
-   - User Satisfaction
-   - Task Completion Rate
-   - Conversation Flow
+   - [ ] User Feedback
+   - [ ] Friendliness and engagenss
+   - [ ] Easiness toward different levels of user's knowlege
 
 ## Chat Engine Evaluation
 
-### CrewAI Version
-1. Model Performance
-   - Agent Coordination
-   - Task Delegation
-   - Multi-agent Communication
-   - Context Management
+We have tested several open-source LLM models and measured the performance in three categories. Here are the key results as a plot.
 
-2. System Performance
-   - Latency
-   - Throughput
-   - Resource Efficiency
+![](docs/figs/metrics_boxplot_by_model.png)
 
-3. Integration Testing
-   - API Compatibility
-   - Error Handling
-   - Recovery Mechanisms
-
-### LangChain Version
-1. Model Performance
-   - Chain Execution
-   - Language Understanding
-   - Response Generation
-   - Context Management
-
-2. System Performance
-   - Chain Processing Speed
-   - Memory Usage
-   - Resource Efficiency
-
-3. Integration Testing
-   - Chain Compatibility
-   - Error Handling
-   - Recovery Mechanisms
+You can find the details [here](docs/opensource_model_performance.md)
 
 ## Notes
 
