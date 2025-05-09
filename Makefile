@@ -20,3 +20,6 @@ batch:
 	python src/chatbot_langchain/batch.py --config evaluation/configs/batch_config.yaml
 	python evaluation/llm_scorer.py --config evaluation/configs/batch_config.yaml
 	python evaluation/score_plot.py
+
+plot:
+	python evaluation/score_plot.py

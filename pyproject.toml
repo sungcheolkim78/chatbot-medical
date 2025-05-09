@@ -1,8 +1,8 @@
 [project]
 name = "chatbot_humana"
 version = "0.1.0"
-description = "chatbot_humana using crewAI"
-authors = [{ name = "Your Name", email = "you@example.com" }]
+description = "medical chatbot using crewAI/langchain with evaluation tools"
+authors = [{ name = "Sung-Cheol Kim", email = "sungcheol.kim78@gmail.com" }]
 requires-python = ">=3.10,<3.13"
 dependencies = [
     "click>=8.1.8",
@@ -20,11 +20,8 @@ dependencies = [
 ]
 
 [project.scripts]
-chatbot_humana = "chatbot_humana.main:run"
-run_crew = "chatbot_humana.main:chat"
-train = "chatbot_humana.main:train"
-replay = "chatbot_humana.main:replay"
-test = "chatbot_humana.main:test"
+run_crewai = "chatbot_crewai.main:run"
+chat_crew = "chatbot_crewai.main:chat"
 
 [build-system]
 requires = ["hatchling"]

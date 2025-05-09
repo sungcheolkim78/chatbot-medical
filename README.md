@@ -1,60 +1,153 @@
-# ChatbotHumana Crew
+# Chatbot Humana
 
-Welcome to the ChatbotHumana Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+A sophisticated chatbot implementation offering two versions: one using CrewAI for advanced agent-based interactions and another using LangChain for flexible chain-based conversations.
+
+## Overview
+
+This repository contains two distinct chatbot implementations:
+
+1. **CrewAI Version**: Leverages CrewAI for advanced conversational AI capabilities with agent-based architecture, enabling complex multi-agent interactions and task delegation.
+2. **LangChain Version**: Utilizes LangChain framework for flexible chain-based conversations, offering robust language model integration and customizable conversation flows.
+
+Both systems are built with modern AI technologies and provide robust frameworks for natural language interactions.
+
+## Features
+
+### CrewAI Version
+- Advanced conversational AI using CrewAI
+- Multi-agent architecture
+- Task delegation and coordination
+- Complex conversation handling
+- Streamlit-based web interface
+
+### LangChain Version
+- Flexible chain-based conversations
+- Multiple language model integrations
+- Customizable conversation flows
+- Knowledge base integration
+- Document processing capabilities
+
+### Common Features
+- Comprehensive evaluation framework
+- Training and testing capabilities
+- Web interface support
+- Knowledge base integration
 
 ## Installation
 
-Ensure you have Python >=3.10 <3.13 installed on your system. This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling, offering a seamless setup and execution experience.
-
-First, if you haven't already, install uv:
-
+1. Clone the repository:
 ```bash
-pip install uv
+git clone https://github.com/yourusername/chatbot_humana.git
+cd chatbot_humana
 ```
 
-Next, navigate to your project directory and install the dependencies:
-
-(Optional) Lock the dependencies and install them by using the CLI command:
+2. Create and activate a virtual environment:
 ```bash
-crewai install
-```
-### Customizing
-
-**Add your `OPENAI_API_KEY` into the `.env` file**
-
-- Modify `src/chatbot_humana/config/agents.yaml` to define your agents
-- Modify `src/chatbot_humana/config/tasks.yaml` to define your tasks
-- Modify `src/chatbot_humana/crew.py` to add your own logic, tools and specific args
-- Modify `src/chatbot_humana/main.py` to add custom inputs for your agents and tasks
-
-## Starting the streamlit application
-
-```bash
-streamlit run src/chatbot_humana/main.py
+python -m venv .venv
+source .venv/bin/activate  # On Windows, use `.venv\Scripts\activate`
 ```
 
-## Running the Project
-
-To kickstart your crew of AI agents and begin task execution, run this from the root folder of your project:
-
+3. Install dependencies:
 ```bash
-$ crewai run
+pip install -r requirements.txt
 ```
 
-This command initializes the chatbot_humana Crew, assembling the agents and assigning them tasks as defined in your configuration.
+## Usage
 
-This example, unmodified, will run the create a `report.md` file with the output of a research on LLMs in the root folder.
+The project provides several command-line interfaces for both versions:
 
-## Understanding Your Crew
+### CrewAI Version
+- `chatbot_humana`: Main CrewAI chatbot interface
+- `run_crew`: Run the CrewAI-based chat system
 
-The chatbot_humana Crew is composed of multiple AI agents, each with unique roles, goals, and tools. These agents collaborate on a series of tasks, defined in `config/tasks.yaml`, leveraging their collective skills to achieve complex objectives. The `config/agents.yaml` file outlines the capabilities and configurations of each agent in your crew.
+### LangChain Version
+- `langchain_chat`: Main LangChain chatbot interface
+- `train_langchain`: Train the LangChain model
+- `test_langchain`: Run LangChain tests
 
-## Support
+To start either version:
+```bash
+# For CrewAI version
+python -m chatbot_humana.main
 
-For support, questions, or feedback regarding the ChatbotHumana Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+# For LangChain version
+python -m chatbot_humana.langchain_main
+```
 
-Let's create wonders together with the power and simplicity of crewAI.
+## Key Evaluation Metrics
+
+The evaluation framework includes several key metrics for both versions:
+
+1. Response Quality
+   - Relevance
+   - Coherence
+   - Accuracy
+   - Completeness
+
+2. Performance Metrics
+   - Response Time
+   - Resource Utilization
+   - Error Rates
+
+3. User Experience
+   - User Satisfaction
+   - Task Completion Rate
+   - Conversation Flow
+
+## Chat Engine Evaluation
+
+### CrewAI Version
+1. Model Performance
+   - Agent Coordination
+   - Task Delegation
+   - Multi-agent Communication
+   - Context Management
+
+2. System Performance
+   - Latency
+   - Throughput
+   - Resource Efficiency
+
+3. Integration Testing
+   - API Compatibility
+   - Error Handling
+   - Recovery Mechanisms
+
+### LangChain Version
+1. Model Performance
+   - Chain Execution
+   - Language Understanding
+   - Response Generation
+   - Context Management
+
+2. System Performance
+   - Chain Processing Speed
+   - Memory Usage
+   - Resource Efficiency
+
+3. Integration Testing
+   - Chain Compatibility
+   - Error Handling
+   - Recovery Mechanisms
+
+## Notes
+
+- The system requires Python 3.10 or higher
+- GPU support is recommended for optimal performance
+- Environment variables should be properly configured for API access
+- Regular updates to the knowledge base are recommended
+- Choose the appropriate version based on your specific needs:
+  - CrewAI version is ideal for complex, multi-agent interactions
+  - LangChain version is better for straightforward, chain-based conversations
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+[Add your license information here]
+
+## Contact
+
+[Add your contact information here]
