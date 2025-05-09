@@ -7,6 +7,8 @@ db/
 logs.txt
 .ruff_cache/
 .venv/
+.streamlit/
 *.log
 */datasets/dataset_*.json
 *.cache
+*/chatbot_results/*
