@@ -1,119 +1,181 @@
-# Medical Chatbot 
+# Medical Chatbot
 
-A sophisticated chatbot implementation offering two versions: one using CrewAI for advanced agent-based interactions and another using LangChain for flexible chain-based conversations.
+A medical domain-specific chatbot implementation with two distinct architectures: LangChain-based for evaluation and prompt engineering, and CrewAI-based for agentic AI demonstration. The system includes a comprehensive evaluation framework for assessing different LLM models and prompt configurations.
 
-## Overview
+![](docs/figs/medical_chatbot.png)
 
-This repository contains two distinct chatbot implementations:
+## Architecture Overview
 
-1. **CrewAI Version**: Leverages CrewAI for advanced conversational AI capabilities with agent-based architecture, enabling complex multi-agent interactions and task delegation.
-2. **LangChain Version**: Utilizes LangChain framework for flexible chain-based conversations, offering robust language model integration and customizable conversation flows.
+### 1. LangChain Implementation
+- **Core Components**:
+  - Document Processing Pipeline
+  - Vector Store Integration (FAISS)
+  - Retrieval-Augmented Generation (RAG)
+  - Custom Chain Implementations
+  - Evaluation Framework
 
-Both systems are built with modern AI technologies and provide robust frameworks for natural language interactions.
+- **Key Features**:
+  - Document chunking and embedding
+  - Semantic search capabilities
+  - Context-aware response generation
+  - Prompt template management
+  - Automated evaluation pipeline
 
-## Features
+### 2. CrewAI Implementation
+- **Core Components**:
+  - Multi-agent System
+  - Task Orchestration
+  - Role-based Specialization
+  - Inter-agent Communication
 
-### CrewAI Version
-- Advanced conversational AI using CrewAI
-- Multi-agent architecture
-- Task delegation and coordination
-- Complex conversation handling
-- Streamlit-based web interface
+- **Key Features**:
+  - Agent-based conversation flow
+  - Task delegation and coordination
+  - Specialized medical knowledge agents
+  - Dynamic conversation management
 
-### LangChain Version
-- Flexible chain-based conversations
-- Multiple language model integrations
-- Customizable conversation flows
-- Knowledge base integration
-- Document processing capabilities
+## Technical Requirements
 
-### Common Features
-- Comprehensive evaluation framework
-- Web interface support
-- Knowledge base integration
+- Python 3.10+
+- CUDA-compatible GPU (recommended)
+- 16GB+ RAM
+- 50GB+ storage for model weights and vector store
 
 ## Installation
 
-1. Clone the repository:
+1. Clone and setup:
 ```bash
-git clone https://github.com/yourusername/chatbot_humana.git
-cd chatbot_humana
-```
-
-2. Create and activate a virtual environment:
-```bash
+git clone https://github.com/yourusername/medical_chatbot.git
+cd medical_chatbot
 python -m venv .venv
-source .venv/bin/activate  # On Windows, use `.venv\Scripts\activate`
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 ```
 
-3. Install dependencies:
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
-
-The project provides several command-line interfaces for both versions via Makefile:
-
-### LangChain Version
-- `chatbot_langchain`: Main LangChain chatbot interface
-- `eval_dataset`: Generate the question/answer dataset from the knowledge base
-- `eval_app`: Web application to view the evaluation dataset
-- `eval_batch`: Generate chatbot conversation based on the evaluation dataset and create the score using judge LLM
-
-### CrewAI Version
-- `chatbot_crewai`: Main CrewAI chatbot interface
-
-To start either version:
+3. Environment Configuration:
 ```bash
-# For LangChain version
-make chatbot_langchain # or python src/chatbot_langchain/app.py
-
-# For CrewAI version
-make chatbot_crewai # or python src/chatbot_crewai/main.py
+# Required environment variables
+OPENAI_API_KEY=your_key_here
+ANTHROPIC_API_KEY=your_key_here
+HUGGINGFACE_API_KEY=your_key_here
 ```
 
-## Key Evaluation Metrics
+## Usage
 
-The evaluation framework includes several key metrics for both versions:
+The project uses Makefile for common operations:
 
-1. Response Quality
-   - [x] Relevance
-   - [x] Coherence
-   - [x] Accuracy
+### LangChain Version
+```bash
+# Start the chatbot
+make chatbot_langchain
 
-2. Performance Metrics
-   - [x] Response Time
-   - [ ] Resource Utilization
-   - [ ] Error Rates
+# Generate evaluation dataset
+make eval_dataset
 
-3. User Experience
-   - [ ] User Feedback
-   - [ ] Friendliness and engagenss
-   - [ ] Easiness toward different levels of user's knowlege
+# Launch evaluation web interface
+make eval_app
 
-## Chat Engine Evaluation
+# Run batch evaluation
+make eval_batch
+```
 
-We have tested several open-source LLM models and measured the performance in three categories. Here are the key results as a plot.
+### CrewAI Version
+```bash
+# Start the agentic chatbot
+make chatbot_crewai
+```
+
+## Evaluation Framework
+
+### 1. Response Quality Metrics
+- [x] Relevance: Semantic alignment with query intent
+- [x] Coherence: Logical flow and consistency
+- [x] Accuracy: Factual correctness and precision
+
+### 2. Performance Metrics
+- [x] Response Time: Latency measurements
+- [ ] Resource Utilization: Memory and CPU profiling
+- [ ] Error Rates: Failure analysis
+
+### 3. User Experience Metrics
+- [ ] User Feedback: Structured feedback collection
+- [ ] Friendliness and Engagement: Interaction quality
+- [ ] Knowledge Adaptation: User expertise level handling
+
+## Model Performance Analysis
+
+We have conducted extensive evaluation of various open-source LLM models across multiple dimensions:
 
 ![](docs/figs/metrics_boxplot_by_model.png)
 
-You can find the details [here](docs/opensource_model_performance.md)
+Detailed performance analysis and methodology can be found in [Open Source Model Performance](docs/opensource_model_performance.md).
 
-## Notes
+### Key Findings:
+1. Model Performance Comparison
+   - Response Quality
+   - Latency Analysis
+   - Resource Efficiency
+   - Error Patterns
 
-- The system requires Python 3.10 or higher
-- GPU support is recommended for optimal performance
-- Environment variables should be properly configured for API access
-- Regular updates to the knowledge base are recommended
-- Choose the appropriate version based on your specific needs:
-  - CrewAI version is ideal for complex, multi-agent interactions
-  - LangChain version is better for straightforward, chain-based conversations
+2. Prompt Engineering Impact
+   - Template Effectiveness
+   - Context Utilization
+   - Response Consistency
+
+3. System Architecture Considerations
+   - Scalability
+   - Resource Requirements
+   - Integration Complexity
+
+## Development Guidelines
+
+### Code Structure
+```
+medical_chatbot/
+├── src/
+│   ├── chatbot_langchain/
+│   │   ├── app.py
+│   │   ├── chains/
+│   │   ├── prompts/
+│   │   └── evaluation/
+│   └── chatbot_crewai/
+│       ├── main.py
+│       ├── agents/
+│       └── tasks/
+├── docs/
+│   ├── figs/
+│   └── opensource_model_performance.md
+├── tests/
+└── Makefile
+```
+
+### Best Practices
+1. Code Organization
+   - Modular architecture
+   - Clear separation of concerns
+   - Comprehensive documentation
+
+2. Testing
+   - Unit tests for core components
+   - Integration tests for workflows
+   - Performance benchmarks
+
+3. Documentation
+   - API documentation
+   - Architecture diagrams
+   - Usage examples
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+1. Fork the repository
+2. Create a feature branch
+3. Implement changes with tests
+4. Submit a pull request
 
 ## Contact
 
-sungcheol.kim78@gmail.com
+For technical inquiries: sungcheol.kim78@gmail.com
