@@ -1,0 +1,6 @@
+MODEL=ollama/llama3.1:latest
+API_BASE=http://localhost:11434
+OPENAI_API_KEY=""
+ANTHROPIC_API_KEY=""
+GOOGLE_API_KEY=""
+UNSTRUCTURED_API_KEY=""
