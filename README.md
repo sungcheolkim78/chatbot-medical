@@ -65,6 +65,8 @@ The project uses Makefile for common operations:
 
 ### LangChain Version
 ```bash
+source .venv/bin/activate
+
 # Start the chatbot
 make chatbot_langchain
 
