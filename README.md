@@ -114,10 +114,6 @@ You can find the details [here](docs/opensource_model_performance.md)
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
-
-[Add your license information here]
-
 ## Contact
 
-[Add your contact information here]
+sungcheol.kim78@gmail.com
