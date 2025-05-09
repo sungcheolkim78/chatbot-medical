@@ -40,7 +40,7 @@ import time
 import click
 import random
 
-from src import (
+from components import (
     Difficulty,
     LLMType,
     setup_logging,

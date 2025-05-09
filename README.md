@@ -101,6 +101,8 @@ make chatbot_crewai
 - [ ] Friendliness and Engagement: Interaction quality
 - [ ] Knowledge Adaptation: User expertise level handling
 
+Detailed evaluation dataset generation and score calculation can be found [here](evaluation/README.md)
+
 ## Model Performance Analysis
 
 We have conducted extensive evaluation of various open-source LLM models across multiple dimensions:

@@ -23,7 +23,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, Any, List, Protocol
 from dataclasses import dataclass
 
-from src import LLMManager, check_api_keys, LLMType, setup_logging
+from components import LLMManager, check_api_keys, LLMType, setup_logging
 
 
 setup_logging()

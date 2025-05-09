@@ -12,3 +12,4 @@ logs.txt
 */datasets/dataset_*.json
 *.cache
 */chatbot_results/*
+logs/
