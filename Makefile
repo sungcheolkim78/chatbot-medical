@@ -11,7 +11,7 @@ chatbot_langchain:
 	streamlit run src/chatbot_langchain/app.py
 
 eval_app:
-	streamlit run evaluation/eval.py
+	streamlit run evaluation/app_eval.py
 
 eval_dataset:
 	python evaluation/dataset_generator.py

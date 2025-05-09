@@ -113,7 +113,6 @@ Detailed performance analysis and methodology can be found in [Open Source Model
 1. Model Performance Comparison
    - Response Quality
    - Latency Analysis
-   - Resource Efficiency
    - Error Patterns
 
 2. Prompt Engineering Impact
@@ -123,7 +122,6 @@ Detailed performance analysis and methodology can be found in [Open Source Model
 
 3. System Architecture Considerations
    - Scalability
-   - Resource Requirements
    - Integration Complexity
 
 ## Development Guidelines
@@ -134,13 +132,23 @@ medical_chatbot/
 ├── src/
 │   ├── chatbot_langchain/
 │   │   ├── app.py
-│   │   ├── chains/
-│   │   ├── prompts/
-│   │   └── evaluation/
+│   │   ├── batch.py
+│   │   └── components/
 │   └── chatbot_crewai/
 │       ├── main.py
-│       ├── agents/
-│       └── tasks/
+│       ├── crew.py
+│       └── config/
+├── knowledge/
+│   ├── slamon1987.pdf
+│   └── slamon1987_claude.md
+├── evaluation/
+│   ├── configs/
+│   ├── chatbot_results/
+│   ├── datasets/
+│   ├── components/
+│   ├── dataset_generator.py
+│   ├── app_eval.py
+│   └── llm_scorer.py
 ├── docs/
 │   ├── figs/
 │   └── opensource_model_performance.md
