@@ -3,12 +3,12 @@ dataset_path: evaluation/datasets/dataset_20250507T001724.json
 
 # Chat response generation
 chat_model_provider: ollama
-chat_model_name: "qwen3:8b"
+chat_model_name: "granite3.2:2b"
 chat_temperature: 0.3
 chat_text_splitter_type: sentence_transformers_token
-chat_top_k: 2
+chat_top_k: 3
 knowledge_path: knowledge/slamon1987_claude.md
-chatbot_results_path: evaluation/chatbot_results/results_qwen3_8b.json
+chatbot_results_path: evaluation/chatbot_results/results_granite3_2_2b.json
 
 # Scoring
 scoring_model_name: gemini-2.5-flash-preview-04-17
@@ -16,4 +16,4 @@ scoring_model_provider: google
 scoring_temperature: 0.3
 scoring_max_workers: 8
 scoring_use_multithreading: true
-scoring_output_file: evaluation/chatbot_results/llm_score_qwen3_8b.csv
+scoring_output_file: evaluation/chatbot_results/llm_score_granite3_2_2b.csv

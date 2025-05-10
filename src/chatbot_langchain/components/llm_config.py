@@ -4,6 +4,7 @@ LLM configuration and model selection module.
 
 import streamlit as st
 import os
+import ollama
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -15,20 +16,11 @@ def get_llm_config():
         "Select a model provider:", ["Ollama", "OpenAI", "Anthropic", "Google Gemini"]
     )
 
+    ollama_models = [model.model for model in ollama.list().models]
+
     # Model selection based on provider
     if model_provider == "Ollama":
-        model_name = st.selectbox(
-            "Select Ollama model:", 
-            [
-                "llama3.1:latest", 
-                "llama3.2:latest",
-                "granite3.2:2b",
-                "granite3.1-dense:2b",
-                "qwen3:1.7b",
-                "qwen3:8b",
-                "qwen3:14b",
-            ]
-        )
+        model_name = st.selectbox("Select Ollama model:", ollama_models)
     elif model_provider == "OpenAI":
         model_name = st.selectbox("Select OpenAI model:", ["gpt-3.5-turbo", "gpt-4"])
     elif model_provider == "Anthropic":
@@ -53,7 +45,7 @@ def get_llm_config():
     text_splitter_type = st.selectbox(
         "Select text splitter type:",
         ["sentence_transformers_token", "recursive_character", "character"],
-        help="Choose how to split the document into chunks"
+        help="Choose how to split the document into chunks",
     )
 
     # Top-k configuration
@@ -63,7 +55,7 @@ def get_llm_config():
         max_value=10,
         value=2,
         step=1,
-        help="Number of most relevant document chunks to retrieve for answering questions"
+        help="Number of most relevant document chunks to retrieve for answering questions",
     )
 
     # Get list of markdown files from knowledge folder
@@ -80,7 +72,14 @@ def get_llm_config():
         else 0,
     )
 
-    return model_provider, model_name, temperature, selected_file, text_splitter_type, top_k
+    return (
+        model_provider,
+        model_name,
+        temperature,
+        selected_file,
+        text_splitter_type,
+        top_k,
+    )
 
 
 def get_llm(model_provider: str, model_name: str, temperature: float):

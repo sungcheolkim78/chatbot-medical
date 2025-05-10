@@ -37,7 +37,14 @@ def main():
     # Get LLM configuration
     with gui.left_column:
         st.markdown("### Settings")
-        model_provider, model_name, temperature, selected_file, text_splitter_type, top_k = get_llm_config()
+        (
+            model_provider,
+            model_name,
+            temperature,
+            selected_file,
+            text_splitter_type,
+            top_k,
+        ) = get_llm_config()
 
     # Initialize LLM and conversation if not already done
     chat_engine = ChatEngine(
@@ -46,7 +53,7 @@ def main():
         temperature=temperature,
         file_path=f"knowledge/{selected_file}",
         text_splitter_type=text_splitter_type,
-        top_k=top_k
+        top_k=top_k,
     )
 
     # Render UI components

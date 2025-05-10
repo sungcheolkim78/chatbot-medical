@@ -8,7 +8,7 @@ from typing import List, Dict, Any, Tuple
 from langchain_core.messages import SystemMessage
 from langgraph.prebuilt import ToolNode, tools_condition
 from langchain.tools import StructuredTool
-from langgraph.checkpoint.memory import MemorySaver
+from langgraph.checkpoint.memory import MemorySaver, InMemorySaver
 import time
 
 from .document_loader import DocumentLoader
@@ -46,14 +46,17 @@ class ChatEngine:
             description="Retrieve information from the knowledge base",
             return_direct=False,
         )
-        self.config = {'configurable': {'thread_id': 'medical_chatbot'}}
+        self.memory = InMemorySaver()
+        self.config = {"configurable": {"thread_id": "1"}}
         self.build_graph()
 
     # Functions for building the LangGraph graph
     def retrieve(self, query: str):
         """Retrieve information related to a query from the knowledge base."""
 
-        retrieved_docs = self.document_loader.vectorstore.similarity_search(query, k=self.top_k)
+        retrieved_docs = self.document_loader.vectorstore.similarity_search(
+            query, k=self.top_k
+        )
         serialized = "\n\n".join(
             (f"Source: {doc.metadata}\nContent: {doc.page_content}")
             for doc in retrieved_docs
@@ -63,7 +66,7 @@ class ChatEngine:
     def query_or_respond(self, state: MessagesState):
         """Generate tool call for retrieval or respond."""
 
-        llm_with_tools = self.llm.bind_tools([self.retrieve])
+        llm_with_tools = self.llm.bind_tools([self.tool])
         response = llm_with_tools.invoke(state["messages"])
         return {"messages": [response]}
 
@@ -80,12 +83,19 @@ class ChatEngine:
 
         docs_content = "\n\n".join(doc.content for doc in tool_messages)
         system_message_content = (
-            "You are an assistant for question-answering tasks. "
+            "You are an assistant with a medical background for question-answering tasks. "
+            "provide accurate, helpful, and engaing responses to a wide range of user queries, "
+            "enhancing user experience and knowledge across various topics. "
+            "\n"
             "Use the following peices of retrieved context to answer "
-            "the question. If you don't know the answer, say that you "
-            "don't know. Use three sentences maximum and keep the answer concise."
+            "the question. If the question is not related to the context, say that "
+            "Sorry, I am allowed to answer questions related to the context only. "
+            "\n"
+            "Use five sentences maximum and ensure the answer is concise and to the point."
+            "if the answer has a complex medical term, explain it in a simple way, although "
+            "you can not find the details in the context. Use your knowledge to explain it."
             "\n\n"
-            f"{docs_content}"
+            f"Here is the context: {docs_content}"
         )
         conversation_messages = [
             message
@@ -100,8 +110,9 @@ class ChatEngine:
 
     def build_graph(self):
         """Build the graph for the chat engine."""
-        memory = MemorySaver()
+
         graph_builder = StateGraph(MessagesState)
+
         graph_builder.add_node("query_or_respond", self.query_or_respond)
         graph_builder.add_node("tools", ToolNode([self.tool]))
         graph_builder.add_node("generate", self.generate)
@@ -110,12 +121,11 @@ class ChatEngine:
         graph_builder.add_conditional_edges(
             "query_or_respond",
             tools_condition,
-            {END: END, "tools": "tools"},
         )
         graph_builder.add_edge("tools", "generate")
         graph_builder.add_edge("generate", END)
 
-        self.graph = graph_builder.compile(checkpointer=memory)
+        self.graph = graph_builder.compile(checkpointer=self.memory)
 
     def add_message(self, role: str, content: str):
         """Add a message to the chat history."""
@@ -137,12 +147,12 @@ class ChatEngine:
 
         start_time = time.time()
         msg = self.graph.invoke(
-            {"messages": [{"role": "user", "content": prompt}]},
+            {"messages": [{"role": "user", "content": prompt}]}, 
             config=self.config
         )
         end_time = time.time()
         response_time = end_time - start_time
-        
+
         return msg["messages"][-1].content, response_time
 
     def clear_history(self):

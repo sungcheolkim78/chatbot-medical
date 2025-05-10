@@ -19,7 +19,9 @@ class GUIHandler:
         """Render the header in the chat column."""
         with self.chat_column:
             st.title("Medical Chatbot")
-            st.markdown("A chatbot powered by LangChain and Streamlit. You can ask questions about the knowledge base.")
+            st.markdown(
+                "A chatbot powered by LangChain and Streamlit. You can ask questions about the knowledge base."
+            )
 
     def render_knowledge_base(self, selected_file: str):
         """Render the knowledge base panel."""
@@ -40,7 +42,7 @@ class GUIHandler:
                                     {content}
                                 </div>
                                 """,
-                                unsafe_allow_html=True
+                                unsafe_allow_html=True,
                             )
                 except Exception as e:
                     st.error(f"Error reading file: {str(e)}")
@@ -67,24 +69,26 @@ class GUIHandler:
                 with st.chat_message("assistant"):
                     with st.spinner("Thinking..."):
                         response, response_time = chat_engine.generate_response(prompt)
-                        
+
                         # Check if response contains thinking process
                         if "<think>" in response and "</think>" in response:
                             # Split response into thinking and final answer
                             thinking_start = response.find("<think>") + len("<think>")
                             thinking_end = response.find("</think>")
                             thinking = response[thinking_start:thinking_end].strip()
-                            final_answer = response[thinking_end + len("</think>"):].strip()
-                            
+                            final_answer = response[
+                                thinking_end + len("</think>") :
+                            ].strip()
+
                             # Display thinking process in a collapsible section
                             with st.expander("Thinking Process", expanded=False):
                                 st.write(thinking)
-                            
+
                             # Display final answer
                             st.write(final_answer)
                         else:
                             st.write(response)
-                            
+
                         st.caption(f"Response time: {response_time:.2f} seconds")
 
                 # Add assistant response to chat history
