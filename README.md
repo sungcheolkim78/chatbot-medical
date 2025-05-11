@@ -109,7 +109,7 @@ Detailed evaluation dataset generation and score calculation can be found [here]
 
 We have conducted extensive evaluation of various open-source LLM models across multiple dimensions:
 
-![](docs/figs/metrics_boxplot_by_model.png)
+![](docs/figs/metrics_boxplot_by_model_v1.png)
 
 Detailed performance analysis and methodology can be found in [Open Source Model Performance](docs/opensource_model_performance.md).
 
