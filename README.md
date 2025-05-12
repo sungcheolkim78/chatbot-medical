@@ -48,8 +48,8 @@ This implementation is premature. However, to demonstrate the difference between
 
 1. Clone and setup:
 ```bash
-git clone https://github.com/sungcheolkim78/chatbot-humana.git
-cd chatbot-humana
+git clone https://github.com/sungcheolkim78/chatbot-medical.git
+cd chatbot-medical
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 ```
@@ -115,17 +115,17 @@ We developed a tool to evaluate the chatbot performance so that continuous impro
 
 And here are the three main metrics for the evaluation. Check marks indicate implemented items and empty items are for future work.
 
-### 1. Response Quality Metrics
+### 1. Response Quality Metrics (Correctness)
 - [x] Relevance: Semantic alignment with query intent
 - [x] Coherence: Logical flow and consistency
 - [x] Accuracy: Factual correctness and precision
 
-### 2. Performance Metrics
+### 2. Performance Metrics (Response Time)
 - [x] Response Time: Latency measurements
 - [ ] Resource Utilization: Memory and CPU profiling
 - [ ] Error Rates: Failure analysis
 
-### 3. User Experience Metrics
+### 3. User Experience Metrics (Style)
 - [ ] User Feedback: Structured feedback collection
 - [x] Friendliness and Engagement: Interaction quality
 - [x] Knowledge Adaptation: User expertise level handling
