@@ -12,6 +12,7 @@ The details of the project requirements can be found [here](docs/project_require
 ## Architecture Overview
 
 ### 1. LangChain Implementation
+
 - **Core Components**:
   - Document Processing Pipeline
   - Vector Store Integration (FAISS)
@@ -25,6 +26,8 @@ The details of the project requirements can be found [here](docs/project_require
   - Context-aware response generation
   - Prompt template management
   - Automated evaluation pipeline
+
+The details of the architectural design can be found [here](docs/architectural_design.md)
 
 ### 2. CrewAI Implementation
 - **Core Components**:
