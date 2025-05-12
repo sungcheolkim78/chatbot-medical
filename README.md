@@ -164,8 +164,20 @@ By continously updating the prompts and measuring the metric improvement, we can
 
 From the publication [1](knowledge/johnson2024.pdf), we can expand our chatbot to handle the multiple knowlege base documents with better precision. 
 
-Three insight from the paper are following. 
-1. 
+**Three insight from the paper:**
+1. The typical embeddings used by the current AI fields such as OpenAI, Voyage embeddings can not capture the medical meanings and relationships between the medical concepts. 
+1. In the paper, they trained the graph network based transformer model and generate the latent embeddings through self-supervised learning to overcome the current embedding methods in clinical domain. 
+1. this embedding can also solve two major challenges in the field; one the personal information issue and the incompatibility between the medical instititues. 
+
+**Importance to the insurance company:**
+The last point of the insight is critical to the commercial insurance company. The privacy of the patient information is critical and the chatbot system does not allow the inputs of the individual medical information. However, this medical embeddings does not use the patient's information during the training process and we can keep the patient's data securaly. As mentioned in the publication, this embeddings still have correlation between the medical concepts and disease types. The chatbot based on this embedding can provide the precision medicine and personalized assistance. 
+
+**Application to the chatbot:**
+One of the limitation of our current chatbot is that the knowledge base is a single publication. To expand multiple papers with scalable services, we need to implement the effiecient retrieval system. Currently, we use FAISS with huggingface embeddings over the whole contents of the single paper. 
+
+We can implement two levels of retrieval system. One is the paper-level embedding match and the other one is the chunk-level embedding match. By applying the unified clinical vocabulary embeddings (UCVE) to each paper, we can find the embeddings. And using the additive property of the embeddings, we can create a single final embedding for the paper. By checking the cosine similarity between the query embedding and paper-level embeddings, we can find the relavant top k (k=2 or 3) papers. Then we can use the typical embeddings from the chunks from those papers. The seconds method is to create cohort of chunks from the all knowledge papers and get the UCVE embeddings for the chunks. Then we can find the relavant chunks by similarity search between the query and the chunk DB. 
+
+The first approach is more scalable to the large collection of the papers, but it has lower accuracy or noiser embedding matching. The second approach need huge vector database system and slower response time, but it can provide the more relavant knowledge to the query. 
 
 
 ## Development Guidelines
