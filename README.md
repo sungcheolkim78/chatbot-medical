@@ -74,10 +74,13 @@ make chatbot_langchain
 make eval_dataset
 
 # Launch evaluation web interface
-make eval_app
+make eval_dataset_app
 
 # Run batch evaluation
 make eval_batch
+
+# Launch LLM score viewer
+make eval_score_app
 ```
 
 ### CrewAI Version
@@ -85,6 +88,17 @@ make eval_batch
 # Start the agentic chatbot
 make chatbot_crewai
 ```
+
+## Screenshot of the web application
+
+Chatbot (Langchain version)
+![](docs/figs/chatbot_langchain_screenshot.png)
+
+Dataset Viewer
+![](docs/figs/eval_app_screenshot.png)
+
+Chatbot Score Viewer
+![](docs/figs/eval_score_screenshot.png)
 
 ## Evaluation Framework
 

@@ -10,10 +10,10 @@ chatbot_crewai:
 chatbot_langchain:
 	streamlit run src/chatbot_langchain/app.py
 
-app_eval:
+eval_dataset_app:
 	streamlit run evaluation/app_eval.py
 
-app_chatbot:
+eval_score_app:
 	streamlit run evaluation/app_chatbot.py
 
 eval_dataset:
