@@ -30,6 +30,9 @@ The details of the project requirements can be found [here](docs/project_require
 The details of the architectural design can be found [here](docs/architectural_design.md)
 
 ### 2. CrewAI Implementation
+
+This implementation is premature. But to demonstrate the difference between agentic AI approach and conditional flow LLM pipeline, we include the chatbot version implemented by CrewAI. It provides the basic chatbot function based on the knowledge base, but there are no evalution pipeline. 
+
 - **Core Components**:
   - Multi-agent System
   - Task Orchestration
@@ -40,8 +43,7 @@ The details of the architectural design can be found [here](docs/architectural_d
   - Agent-based conversation flow
   - Task delegation and coordination
   - Specialized medical knowledge agents
-  - Dynamic conversation management
-
+  
 ## Installation
 
 1. Clone and setup:
@@ -80,7 +82,7 @@ make chatbot_langchain
 # Generate evaluation dataset
 make eval_dataset
 
-# Launch evaluation web interface
+# Launch evaluation dataset viewer
 make eval_dataset_app
 
 # Run batch evaluation
@@ -98,13 +100,13 @@ make chatbot_crewai
 
 ## Screenshot of the web application
 
-Chatbot (Langchain version)
+Chatbot (Langchain version) - The main chatbot application
 ![](docs/figs/chatbot_langchain_screenshot.png)
 
-Dataset Viewer
+Dataset Viewer - The dataset viewer to validate the evaluation dataset with the source excerpts
 ![](docs/figs/eval_app_screenshot.png)
 
-Chatbot Score Viewer
+Chatbot Score Viewer - The chatbot response viewer with LLM Judge score
 ![](docs/figs/eval_score_screenshot.png)
 
 ## Evaluation Framework
@@ -138,11 +140,12 @@ We have conducted extensive evaluation of various open-source LLM models across 
 
 Detailed performance analysis and methodology can be found in [Open Source Model Performance](docs/opensource_model_performance.md).
 
+By continously updating the prompts and measuring the metric improvement, we can improve the chatbot system incrementally. You can find the details of the continous developement [here](docs/continous_development.md)
+
 ### Key Findings:
 
-1. Model Performance Comparison
-   - Response Quality
-   - Latency Analysis
+1. Factuality Check
+   - Response Quality and Correctness based on the base LLM models and prompt engineering
    - Error Patterns
 
 2. Prompt Engineering Impact
@@ -151,8 +154,19 @@ Detailed performance analysis and methodology can be found in [Open Source Model
    - Response Consistency
 
 3. System Architecture Considerations
+   - Latency Analysis
    - Scalability
    - Integration Complexity
+
+## Future Works
+
+### Integration of the Unified Clinical Vocabulary Embeddings
+
+From the publication [1](knowledge/johnson2024.pdf), we can expand our chatbot to handle the multiple knowlege base documents with better precision. 
+
+Three insight from the paper are following. 
+1. 
+
 
 ## Development Guidelines
 
