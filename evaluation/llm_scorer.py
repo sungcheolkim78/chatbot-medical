@@ -44,6 +44,9 @@ class CorrectnessScoringStrategy(ScoringStrategy):
     def score(self, data: Dict[str, Any]) -> float:
         prompt = f"""Rate the correctness of the response compared to the ground truth on a scale of 0-1.
         Consider if the response contains the key information from the ground truth.
+        0 means the response is incorrect or does not contain the key information from the ground truth.
+        1 means the response is correct and contains the key information from the ground truth.
+        the values between 0 and 1 are for the response that is close to the ground truth or missing some information.
         provide only score, no other text.
         
         Ground Truth: {data["ground_truth"]}
@@ -65,7 +68,9 @@ class StyleScoringStrategy(ScoringStrategy):
 
     def score(self, data: Dict[str, Any]) -> float:
         prompt = f"""Rate the style of this chatbot response on a scale of 0-1.
-        Consider if it is engaging, friendly, and appropriate for a chatbot.
+        Consider if the response is engaging, friendly, and appropriate for a chatbot.
+        0 means the response has only a few words and is not engaging.
+        1 means the response is engaging, friendly, and appropriate for a chatbot.
         provide only score, no other text.
         
         Response: {data["answer"]}
@@ -167,6 +172,7 @@ class LLMScorer:
 
     def _score_single_response(self, response_data: Dict[str, Any]) -> Dict[str, float]:
         """Score a single response using all criteria."""
+
         logging.info("Scoring single response")
         scores = {
             name: strategy.score(response_data)
@@ -174,12 +180,13 @@ class LLMScorer:
         }
         scores.update(
             {
+                "id": response_data["id"],
                 "model_name": response_data["model_name"],
                 "temperature": response_data["temperature"],
                 "difficulty": response_data["difficulty"],
             }
         )
-        logging.info(f"Response scored: {scores}")
+        logging.debug(f"Response scored: {scores}")
         return scores
 
     def score_responses(
@@ -195,6 +202,7 @@ class LLMScorer:
         Returns:
             list: List of dictionaries containing scores for each response
         """
+
         responses = self._load_responses()
         scores = []
 
@@ -263,6 +271,7 @@ class ScoringCommand:
             writer = csv.DictWriter(
                 f,
                 fieldnames=[
+                    "id",
                     "correctness",
                     "style",
                     "response_time",

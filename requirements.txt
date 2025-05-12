@@ -11,3 +11,5 @@ anthropic==0.18.1
 python-dotenv==1.0.1
 click>=8.1.7
 pip install -U git+https://github.com/qubvel/transformers@fix-custom-kernels
+streamlit==1.32.0
+pandas==2.2.1

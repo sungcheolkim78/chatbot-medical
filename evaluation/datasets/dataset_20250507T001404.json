@@ -1,0 +1,182 @@
+[
+  {
+    "question": "What was the incidence of EGFR gene amplification and rearrangement in the studied breast cancer cases?",
+    "answer": "According to the excerpt, the study found that the incidence of EGFR gene amplification was 'found in 4 / 189 ( 2 % ) of the cases,' and 'rearrangement of the egfr gene was found in one of those four cases.' This indicates that the occurrence of EGFR alterations in this cohort was relatively low compared to HER-2/neu amplification.",
+    "source": "'amplification of the egfr gene was found in 4 / 189 ( 2 % ) of the cases, and rearrangement of the egfr gene was found in one of those four cases.'",
+    "full_context": "[Chunk 29] ( > 50 copies ) of the egfr gene. to determine whether the phenomenon of amplification of her - 2 / neu in breast cancer extended to related growth factor receptors, all filters were analyzed with the egfr probe ( fig. 4 ). amplification of the egfr gene was found in 4 / 189 ( 2 % ) of the cases, and rearrangement of the egfr gene was found in one of those four cases. the incidence of egfr amplification and rearrangement was too small to attempt statistical correlation. comparison of her - 2 / neu amplification ( 53 / 189 or 28 % ) with that of the egfr gene reveals the incidence of the former",
+    "difficulty": "hard",
+    "confidence": "high",
+    "llm_type": "gpt-4o-mini",
+    "timestamp": "2025-05-07 00:14:09"
+  },
+  {
+    "question": "What is the relationship between HER-2/neu amplification and nodal status as described in the excerpt?",
+    "answer": "According to the excerpt, there is a strong relationship between HER-2/neu amplification and nodal status, indicated by a p-value of 0.002. This suggests that as the number of positive lymph nodes increases, the likelihood of HER-2/neu amplification also increases, which may correlate with disease recurrence and survival.",
+    "source": "the strong relationship between her - 2 / neu amplification and nodal status ( p = 0. 002 )",
+    "full_context": "[Chunk 20] 10 3 106 0. 06 pgr - 63 6 10 4 83 tumor size ( centimeters ) < 2 31 9 4 0 44 0. 19 2 - 5 62 13 7 2 84 > 5 23 4 6 3 36 unknown 20 0 3 2 25 age at diagnosis ( years ) < 50 37 13 8 2 60 0. 11 > 50 88 13 10 5 116 unknown 11 0 2 0 13 number of positive lymph nodes 0 30 0 3 1 34 0. 002 1 - 3 51 7 6 1 65 > 3 38 18 8 4 68 unknown 17 1 3 1 22 correlation with disease recurrence and survival the strong relationship between her - 2 / neu amplification and nodal status ( p = 0. 002 )",
+    "difficulty": "hard",
+    "confidence": "high",
+    "llm_type": "gpt-4o-mini",
+    "timestamp": "2025-05-07 00:14:09"
+  },
+  {
+    "question": "How was the amplification of HER-2/neu confirmed in the study?",
+    "answer": "According to the excerpt, the amplification of HER-2/neu was confirmed through serial dilutions of tumor DNA samples. Specifically, the paper states: 'lanes contain dna from tumors with different copy numbers of her - 2 / neu'. This demonstrates that the researchers used varying amounts of DNA from different tumors to assess the copy number variations.",
+    "source": "'lanes contain dna from tumors with different copy numbers of her - 2 / neu'",
+    "full_context": "[Chunk 13] amplification were confirmed through serial dilutions of tumor dna samples. lanes contain dna from tumors with different copy numbers of her - 2 / neu : - lane a : single copy ( tumor 31 ) - lane g : > 20 copies ( tumor 33 ) with serial dilutions in lanes b - f - lane k : 2 - 5 copies ( tumor 35 ) with serial dilutions in lanes h - j - lane p : 5 - 20 copies ( tumor 34 ) with serial dilutions in lanes l - o figure 2 b demonstrates the use of an arginase probe hybridization to confirm that equivalent amounts of tumor dna were loaded into each lane. this control ensures that the differences in her - 2 / neu signal intensity",
+    "difficulty": "medium",
+    "confidence": "medium",
+    "llm_type": "gpt-4o-mini",
+    "timestamp": "2025-05-07 00:14:09"
+  },
+  {
+    "question": "What impact does HER-2/neu gene amplification have on patient outcomes according to the excerpt?",
+    "answer": "According to the excerpt, patients with greater than five copies of the HER-2/neu gene had significantly worse outcomes. Specifically, the paper states: 'patients with greater than five copies of her - 2 / neu had even shorter disease - free survival times ( p = 0. 015 ) and overall survival times ( p = 0. 06 )'. This demonstrates that higher levels of gene amplification correlate with poorer survival rates.",
+    "source": "'patients with greater than five copies of her - 2 / neu had even shorter disease - free survival times ( p = 0. 015 ) and overall survival times ( p = 0. 06 )'",
+    "full_context": "[Chunk 26] / neu amplification, particularly those with > 5 copies, had significantly worse outcomes in terms of both disease - free survival and overall survival. while there was a somewhat shortened time to relapse and shorter overall survival in patients having any amplification of the her - 2 / neu gene in their tumors ( fig. 3, a and b ), the greatest differences were found when comparing patients with > 5 copies of the gene to those without amplification ( single copy ) ( fig. 3, c and d ). patients with greater than five copies of her - 2 / neu had even shorter disease - free survival times ( p = 0. 015 ) and overall survival times ( p = 0. 06 ) when",
+    "difficulty": "medium",
+    "confidence": "high",
+    "llm_type": "gpt-4o-mini",
+    "timestamp": "2025-05-07 00:14:09"
+  },
+  {
+    "question": "What impact does neu amplification have on breast cancer patient outcomes according to the excerpt?",
+    "answer": "According to the excerpt, patients with neu amplification, particularly those with > 5 copies, had significantly worse outcomes. Specifically, the paper states: 'patients with greater than five copies of her - 2 / neu had even shorter disease - free survival times ( p = 0. 015 ) and overall survival times ( p = 0. 06 )'. This demonstrates that higher levels of neu amplification correlate with poorer survival rates.",
+    "source": "patients with greater than five copies of her - 2 / neu had even shorter disease - free survival times ( p = 0. 015 ) and overall survival times ( p = 0. 06 )",
+    "full_context": "[Chunk 26] / neu amplification, particularly those with > 5 copies, had significantly worse outcomes in terms of both disease - free survival and overall survival. while there was a somewhat shortened time to relapse and shorter overall survival in patients having any amplification of the her - 2 / neu gene in their tumors ( fig. 3, a and b ), the greatest differences were found when comparing patients with > 5 copies of the gene to those without amplification ( single copy ) ( fig. 3, c and d ). patients with greater than five copies of her - 2 / neu had even shorter disease - free survival times ( p = 0. 015 ) and overall survival times ( p = 0. 06 ) when",
+    "difficulty": "easy",
+    "confidence": "high",
+    "llm_type": "gpt-4o-mini",
+    "timestamp": "2025-05-07 00:14:10"
+  },
+  {
+    "question": "What method was used to analyze alterations in the her - 2 / neu gene in the study?",
+    "answer": "According to the excerpt, the method used to analyze alterations in the her - 2 / neu gene involved preparing DNA from individual tumors, digesting it with Eco RI, and subjecting it to Southern blot analysis with a 32P-labeled her - 2 / neu - 1 probe. Specifically, the paper states: 'dna from individual tumors was prepared as described, digested with eco ri, and subjected to southern blot analysis with a 32 p - labeled her - 2 / neu - 1 probe'. This demonstrates that the researchers employed a molecular technique to detect gene amplification.",
+    "source": "'dna from individual tumors was prepared as described, digested with eco ri, and subjected to southern blot analysis with a 32 p - labeled her - 2 / neu - 1 probe'",
+    "full_context": "[Chunk 10] evaluated for alterations in the her - 2 / neu gene. dna from individual tumors was prepared as described, digested with eco ri, and subjected to southern blot analysis with a 32 p - labeled her - 2 / neu - 1 probe, which is known to detect a 13 - kb hybridizing band in human dna. results analysis of her - 2 / neu gene amplification figure 1 description : figure 1 shows the analysis of alterations of the her - 2 / neu gene in human breast cancer. the image displays southern blot analysis of 79 of the 189 breast tumors used in this study. tumors were categorized based on their her - 2 / neu copy number : - single copy of her - 2 / neu :",
+    "difficulty": "easy",
+    "confidence": "high",
+    "llm_type": "gpt-4o-mini",
+    "timestamp": "2025-05-07 00:14:10"
+  },
+  {
+    "question": "What percentage of samples showed evidence of HER-2/neu gene amplification in the initial survey?",
+    "answer": "According to the excerpt, 18% of the samples examined in the initial survey showed evidence of HER-2/neu gene amplification. Specifically, the paper states: 'of the 103 samples examined in the initial survey, 19 (18%) showed evidence of her-2/neu gene amplification.' This demonstrates that a significant minority of the samples exhibited this genetic characteristic.",
+    "source": "of the 103 samples examined in the initial survey, 19 (18%) showed evidence of her-2/neu gene amplification.",
+    "full_context": "[Chunk 12] , 69, 73, and 79 - more than 20 copies of her - 2 / neu : samples 18, 30, 33, 59, 68, and 78 samples 77 - 79 also show rearrangements in the her - 2 / neu gene of the 103 samples examined in the initial survey, 19 ( 18 % ) showed evidence of her - 2 / neu gene amplification. the degree of amplification in individual cases was determined by dilution analysis, as well as soft laser densitometry scanning. figure 2 description : figure 2 a shows an example of dilutional analysis to assess the degree of her - 2 / neu gene amplification. the figure demonstrates how different levels of gene amplification",
+    "difficulty": "easy",
+    "confidence": "high",
+    "llm_type": "claude-3-5-sonnet-20240620",
+    "timestamp": "2025-05-07 00:14:10"
+  },
+  {
+    "question": "What was used as a control to assess the amount of DNA loaded in the study?",
+    "answer": "According to the excerpt, the arginase gene probe was used as a control to assess the amount of DNA loaded. Specifically, the paper states: 'this probe identifies a 15 - kb hybridizing band on eco ri - digested human dna, and was selected as a control because it more appropriately assesses the relative amount and transfer of high molecular weight species than a probe hybridizing with low molecular weight species.' This demonstrates that the researchers aimed to ensure accurate comparisons of gene amplification.",
+    "source": "'this probe identifies a 15 - kb hybridizing band on eco ri - digested human dna, and was selected as a control because it more appropriately assesses the relative amount and transfer of high molecular weight species than a probe hybridizing with low molecular weight species.'",
+    "full_context": "[Chunk 14] ##u signal intensity reflect true gene amplification rather than differences in dna loading. to determine that the amount of dna loaded in each lane was equivalent, all filters were washed and rehybridized with a 32 p - labeled arginase gene probe. this probe identifies a 15 - kb hybridizing band on eco ri - digested human dna, and was selected as a control because it more appropriately assesses the relative amount and transfer of high molecular weight species than a probe hybridizing with low molecular weight species, which transfer more readily on southern blotting. correlation with disease parameters in the 103 tumors evaluated in the initial survey, there was essentially no correlation between gene amplification and estrogen receptor status, progesterone receptor status",
+    "difficulty": "easy",
+    "confidence": "high",
+    "llm_type": "claude-3-5-sonnet-20240620",
+    "timestamp": "2025-05-07 00:14:10"
+  },
+  {
+    "question": "What percentage of breast cancer patients with positive lymph nodes in the second study had HER-2/neu gene amplification?",
+    "answer": "According to the excerpt, in the second study focusing on breast cancer patients with positive axillary lymph nodes, HER-2/neu gene amplification was detected in 40% of the patients. The text states: \"amplification of the her - 2 / neu gene was found in 34 / 86 ( 40 % ) of these patients.\" This shows the proportion of patients in this group with HER-2/neu amplification.",
+    "source": "amplification of the her - 2 / neu gene was found in 34 / 86 ( 40 % ) of these patients.",
+    "full_context": "[Chunk 17] 0 30 0 3 1 34 0. 11 1 - 3 20 0 1 1 22 > 3 17 2 4 2 25 unknown 17 1 3 1 22 for the second study, 100 breast cancer samples from patients with positive axillary lymph nodes were analyzed. of these 100 samples, 86 yielded sufficient dna for study. amplification of the her - 2 / neu gene was found in 34 / 86 ( 40 % ) of these patients. for this larger sample of node - positive patients, several statistically significant or nearly significant relationships were observed. in agreement with the preliminary survey, there was an association between number of involved lymph nodes and her - 2 / neu amplification ( table 2 ). in addition, the",
+    "difficulty": "easy",
+    "confidence": "high",
+    "llm_type": "gemini-2.5-flash-preview-04-17",
+    "timestamp": "2025-05-07 00:14:11"
+  },
+  {
+    "question": "What role does the her - 2 / neu amplification play in breast cancer according to the excerpt?",
+    "answer": "According to the excerpt, the correlation of her - 2 / neu amplification with disease progression indicates it may be an important gene in the disease process. Specifically, the paper states: 'the correlation of her - 2 / neu amplification with disease progression indicates it may be an important gene in the disease process.' This demonstrates that alterations in this gene could significantly influence the progression of breast cancer.",
+    "source": "'the correlation of her - 2 / neu amplification with disease progression indicates it may be an important gene in the disease process.'",
+    "full_context": "[Chunk 34] ##c, the correlation of her - 2 / neu amplification with disease progression indicates it may be an important gene in the disease process. the role of other cell receptors in the biology of breast cancer is well established. it is easy to speculate that a gene encoding a putative growth factor receptor, when expressed in inappropriate amounts, may give a growth advantage to the cells expressing it. alternatively, alteration in the gene product itself may lead to a critical change in the receptor protein. a single point mutation in the transmembrane domain of the protein encoded by the rat neu oncogene appears to be all that is necessary for the gene to gain transforming ability. whether this or a similar alteration is found in the amplified her -",
+    "difficulty": "easy",
+    "confidence": "high",
+    "llm_type": "gemini-2.5-flash-preview-04-17",
+    "timestamp": "2025-05-07 00:14:11"
+  },
+  {
+    "question": "How did the researchers check if they loaded the same amount of tumor DNA into each lane?",
+    "answer": "According to the excerpt, the researchers used an arginase probe hybridization as a control to confirm that equivalent amounts of tumor DNA were loaded into each lane. This control helps ensure that differences in the HER-2/neu signal intensity are due to actual differences in copy number, not just variations in the amount of DNA loaded. Specifically, the paper states: \"figure 2 b demonstrates the use of an arginase probe hybridization to confirm that equivalent amounts of tumor dna were loaded into each lane. this control ensures that the differences in her - 2 / neu signal intensity\".",
+    "source": "figure 2 b demonstrates the use of an arginase probe hybridization to confirm that equivalent amounts of tumor dna were loaded into each lane. this control ensures that the differences in her - 2 / neu signal intensity",
+    "full_context": "[Chunk 13] amplification were confirmed through serial dilutions of tumor dna samples. lanes contain dna from tumors with different copy numbers of her - 2 / neu : - lane a : single copy ( tumor 31 ) - lane g : > 20 copies ( tumor 33 ) with serial dilutions in lanes b - f - lane k : 2 - 5 copies ( tumor 35 ) with serial dilutions in lanes h - j - lane p : 5 - 20 copies ( tumor 34 ) with serial dilutions in lanes l - o figure 2 b demonstrates the use of an arginase probe hybridization to confirm that equivalent amounts of tumor dna were loaded into each lane. this control ensures that the differences in her - 2 / neu signal intensity",
+    "difficulty": "medium",
+    "confidence": "high",
+    "llm_type": "gemini-2.5-flash-preview-04-17",
+    "timestamp": "2025-05-07 00:14:11"
+  },
+  {
+    "question": "What was the incidence of EGFR gene amplification in the studied breast cancer cases?",
+    "answer": "According to the excerpt, the study found that EGFR gene amplification occurred in a small percentage of cases. Specifically, the paper states: 'amplification of the egfr gene was found in 4 / 189 ( 2 % ) of the cases'. This demonstrates that the incidence of EGFR amplification was relatively low compared to HER-2/neu amplification.",
+    "source": "'amplification of the egfr gene was found in 4 / 189 ( 2 % ) of the cases'",
+    "full_context": "[Chunk 29] ( > 50 copies ) of the egfr gene. to determine whether the phenomenon of amplification of her - 2 / neu in breast cancer extended to related growth factor receptors, all filters were analyzed with the egfr probe ( fig. 4 ). amplification of the egfr gene was found in 4 / 189 ( 2 % ) of the cases, and rearrangement of the egfr gene was found in one of those four cases. the incidence of egfr amplification and rearrangement was too small to attempt statistical correlation. comparison of her - 2 / neu amplification ( 53 / 189 or 28 % ) with that of the egfr gene reveals the incidence of the former",
+    "difficulty": "medium",
+    "confidence": "high",
+    "llm_type": "gemini-2.5-flash-preview-04-17",
+    "timestamp": "2025-05-07 00:14:11"
+  },
+  {
+    "question": "According to the excerpt, what specific type of evidence is considered 'more direct' in linking proto-oncogenes to cell growth, and what quantitative data supports this claim?",
+    "answer": "The excerpt states that 'more direct evidence' linking proto-oncogenes to cell growth comes from their relationship to growth factors or receptors. Quantitatively, the paper notes that 'of the 20 known proto - oncogenes, three are related to a growth factor or a growth factor receptor.'",
+    "source": "more direct evidence comes from the fact that, of the 20 known proto - oncogenes, three are related to a growth factor or a growth factor receptor.",
+    "full_context": "[Chunk 3] in tumorigenesis by chronic transforming retroviruses such as avian leukosis virus data from human tumors include : 1. increased expression of specific proto - oncogenes in some human malignancies 2. localization of proto - oncogenes at or near the site of specific, tumor - associated chromosomal translocations 3. amplification of proto - oncogenes in some human tumors additional data linking proto - oncogenes to cell growth is their expression in response to certain proliferation signals and their expression during embryonic development. more direct evidence comes from the fact that, of the 20 known proto - oncogenes, three are related to a growth factor or a growth factor receptor. these",
+    "difficulty": "hard",
+    "confidence": "high",
+    "llm_type": "gemini-2.5-flash-preview-04-17",
+    "timestamp": "2025-05-07 00:14:11"
+  },
+  {
+    "question": "What correlation is highlighted in the excerpt regarding HER-2/neu amplification and nodal status?",
+    "answer": "According to the excerpt, there is a strong relationship between HER-2/neu amplification and nodal status, with a p-value of 0.002 indicating statistical significance. Specifically, the paper states: 'the strong relationship between her - 2 / neu amplification and nodal status ( p = 0. 002 )'. This demonstrates that HER-2/neu amplification may be an important factor in assessing disease recurrence and survival.",
+    "source": "'the strong relationship between her - 2 / neu amplification and nodal status ( p = 0. 002 )'",
+    "full_context": "[Chunk 20] 10 3 106 0. 06 pgr - 63 6 10 4 83 tumor size ( centimeters ) < 2 31 9 4 0 44 0. 19 2 - 5 62 13 7 2 84 > 5 23 4 6 3 36 unknown 20 0 3 2 25 age at diagnosis ( years ) < 50 37 13 8 2 60 0. 11 > 50 88 13 10 5 116 unknown 11 0 2 0 13 number of positive lymph nodes 0 30 0 3 1 34 0. 002 1 - 3 51 7 6 1 65 > 3 38 18 8 4 68 unknown 17 1 3 1 22 correlation with disease recurrence and survival the strong relationship between her - 2 / neu amplification and nodal status ( p = 0. 002 )",
+    "difficulty": "hard",
+    "confidence": "high",
+    "llm_type": "gemini-2.5-flash-preview-04-17",
+    "timestamp": "2025-05-07 00:14:11"
+  },
+  {
+    "question": "What potential clinical implications does the HER-2/neu gene amplification have for stage I breast cancer patients, according to the excerpt?",
+    "answer": "The excerpt suggests that HER-2/neu gene amplification may have significant clinical implications for stage I breast cancer patients. Specifically, it states that 15% of stage I (node-negative) breast cancer patients have HER-2/neu amplification. The authors propose that measuring HER-2/neu in this group could potentially impact the prediction of tumor behavior and influence treatment strategies. This is particularly important as stage I patients typically have a better prognosis, but HER-2/neu amplification could identify those at higher risk who might benefit from more aggressive treatment.",
+    "source": "this stage i setting may be an additional group in which her - 2 / neu measurements will have an impact in predicting biologic behavior of the tumor, and as a result, in design of treatment strategy.",
+    "full_context": "[Chunk 35] amplified her - 2 / neu gene in human breast cancer will require sequence analysis of the homologous region in the amplified human gene. the initial survey from the current study showed that 15 % of breast cancer patients with stage i disease ( node - negative ) have her - 2 / neu amplification. unfortunately, no long - term follow - up data were available for these patients. this stage i setting may be an additional group in which her - 2 / neu measurements will have an impact in predicting biologic behavior of the tumor, and as a result, in design of treatment strategy. finally, if the her - 2 / neu gene product functions as a growth factor receptor that plays a role in the pathogenesis of breast cancer",
+    "difficulty": "hard",
+    "confidence": "high",
+    "llm_type": "claude-3-5-sonnet-20240620",
+    "timestamp": "2025-05-07 00:14:12"
+  },
+  {
+    "question": "What trend was observed regarding HER-2/neu amplification and the number of positive lymph nodes?",
+    "answer": "According to the excerpt, a trend was noted in the analysis of HER-2/neu amplification and the number of positive lymph nodes. Specifically, the paper states: 'this analysis showed that 4 / 34 ( 11 % ) of patients with no involved nodes, 2 / 20 ( 10 % ) with 1 to 3 involved nodes, and 8 / 25 ( 32 % ) with > 3 involved nodes had gene amplification ( p = 0. 11 )'. This demonstrates that there is a potential correlation between the number of involved lymph nodes and HER-2/neu amplification.",
+    "source": "'this analysis showed that 4 / 34 ( 11 % ) of patients with no involved nodes, 2 / 20 ( 10 % ) with 1 to 3 involved nodes, and 8 / 25 ( 32 % ) with > 3 involved nodes had gene amplification ( p = 0. 11 )'",
+    "full_context": "[Chunk 15] ##one receptor status, size of tumors, or age at diagnosis ( table 1 ). however, when analysis was performed for association between her - 2 / neu amplification and number of positive lymph nodes, a trend was noted. this analysis showed that 4 / 34 ( 11 % ) of patients with no involved nodes, 2 / 20 ( 10 % ) with 1 to 3 involved nodes, and 8 / 25 ( 32 % ) with > 3 involved nodes had gene amplification ( p = 0. 11 ). if these data were examined by comparing 0 to 3 positive nodes versus > 3 positive nodes, the correlation with gene amplification became more significant ( p < 0. 05 ). table 1. association between her -",
+    "difficulty": "hard",
+    "confidence": "high",
+    "llm_type": "claude-3-5-sonnet-20240620",
+    "timestamp": "2025-05-07 00:14:12"
+  },
+  {
+    "question": "What specific genetic alteration in the rat neu oncogene is mentioned as potentially conferring transforming ability, and how might this relate to HER-2/neu amplification in breast cancer?",
+    "answer": "The excerpt mentions that a single point mutation in the transmembrane domain of the protein encoded by the rat neu oncogene appears to be sufficient for the gene to gain transforming ability. This is significant because it suggests that small genetic changes can have profound effects on oncogene function. In the context of HER-2/neu amplification in breast cancer, this implies that either increased expression of the normal gene product or potentially similar small mutations in the human HER-2/neu gene could contribute to cancer progression. The excerpt states: 'a single point mutation in the transmembrane domain of the protein encoded by the rat neu oncogene appears to be all that is necessary for the gene to gain transforming ability.' This underscores the importance of investigating both gene amplification and potential mutations in understanding the role of HER-2/neu in breast cancer biology.",
+    "source": "a single point mutation in the transmembrane domain of the protein encoded by the rat neu oncogene appears to be all that is necessary for the gene to gain transforming ability. whether this or a similar alteration is found in the amplified her -",
+    "full_context": "[Chunk 34] ##c, the correlation of her - 2 / neu amplification with disease progression indicates it may be an important gene in the disease process. the role of other cell receptors in the biology of breast cancer is well established. it is easy to speculate that a gene encoding a putative growth factor receptor, when expressed in inappropriate amounts, may give a growth advantage to the cells expressing it. alternatively, alteration in the gene product itself may lead to a critical change in the receptor protein. a single point mutation in the transmembrane domain of the protein encoded by the rat neu oncogene appears to be all that is necessary for the gene to gain transforming ability. whether this or a similar alteration is found in the amplified her -",
+    "difficulty": "medium",
+    "confidence": "high",
+    "llm_type": "claude-3-5-sonnet-20240620",
+    "timestamp": "2025-05-07 00:14:13"
+  },
+  {
+    "question": "What is the prognostic significance of her - 2 / neu in breast cancer according to the excerpt?",
+    "answer": "According to the excerpt, her - 2 / neu has greater prognostic value than most currently used prognostic factors, including progesterone and estrogen receptors, and is equivalent to and independent of the best known prognosticator \u2014 number of positive lymph nodes. Specifically, the paper states: 'the degree of her - 2 / neu amplification appears to have an effect on survival, with greater copy number being associated with a worse prognosis'. This demonstrates that her - 2 / neu is a critical factor in assessing breast cancer prognosis.",
+    "source": "'her - 2 / neu has greater prognostic value than most currently used prognostic factors, including progesterone and estrogen receptors, and is equivalent to and independent of the best known prognosticator \u2014 number of positive lymph nodes. finally, the degree of her - 2 / neu amplification appears to have an effect on survival, with greater copy number being associated with a worse prognosis'",
+    "full_context": "[Chunk 33] ##fication of her - 2 / neu has greater prognostic value than most currently used prognostic factors, including progesterone and estrogen receptors, and is equivalent to and independent of the best known prognosticator \u2014 number of positive lymph nodes. finally, the degree of her - 2 / neu amplification appears to have an effect on survival, with greater copy number being associated with a worse prognosis ( fig. 3, c and d ). a similar phenomenon has been observed for n - myc gene amplification in human neuroblastoma. the potential role of her - 2 / neu in the pathogenesis of breast cancer is unknown. like n - myc, the",
+    "difficulty": "medium",
+    "confidence": "high",
+    "llm_type": "claude-3-5-sonnet-20240620",
+    "timestamp": "2025-05-07 00:14:13"
+  }
+]
