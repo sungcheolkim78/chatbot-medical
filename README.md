@@ -109,6 +109,10 @@ Chatbot Score Viewer
 
 ## Evaluation Framework
 
+We developed a tool to evaluate the chat-bot performance so that the continuous improvement can be possible. The initial step is to clean up the information for the knowledge base. We are using the seminal paper "Human Breast Cancer: Correlation of Relapse and Survival with Amplification of the HER-2/neu Oncogene" You can find the details how to preprocess the PDF [here](knowledge/README.md) 
+
+And here are the three main metrics for the evaluation. Check marks are implemented items and the empty item is for future works. 
+
 ### 1. Response Quality Metrics
 - [x] Relevance: Semantic alignment with query intent
 - [x] Coherence: Logical flow and consistency
@@ -121,8 +125,8 @@ Chatbot Score Viewer
 
 ### 3. User Experience Metrics
 - [ ] User Feedback: Structured feedback collection
-- [ ] Friendliness and Engagement: Interaction quality
-- [ ] Knowledge Adaptation: User expertise level handling
+- [x] Friendliness and Engagement: Interaction quality
+- [x] Knowledge Adaptation: User expertise level handling
 
 Detailed evaluation dataset generation and score calculation can be found [here](evaluation/README.md)
 
@@ -135,6 +139,7 @@ We have conducted extensive evaluation of various open-source LLM models across 
 Detailed performance analysis and methodology can be found in [Open Source Model Performance](docs/opensource_model_performance.md).
 
 ### Key Findings:
+
 1. Model Performance Comparison
    - Response Quality
    - Latency Analysis
@@ -180,22 +185,6 @@ medical_chatbot/
 ├── tests/
 └── Makefile
 ```
-
-### Best Practices
-1. Code Organization
-   - Modular architecture
-   - Clear separation of concerns
-   - Comprehensive documentation
-
-2. Testing
-   - Unit tests for core components
-   - Integration tests for workflows
-   - Performance benchmarks
-
-3. Documentation
-   - API documentation
-   - Architecture diagrams
-   - Usage examples
 
 ## Contributing
 
