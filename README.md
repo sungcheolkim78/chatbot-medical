@@ -31,7 +31,7 @@ The details of the architectural design can be found [here](docs/architectural_d
 
 ### 2. CrewAI Implementation
 
-This implementation is premature. But to demonstrate the difference between agentic AI approach and conditional flow LLM pipeline, we include the chatbot version implemented by CrewAI. It provides the basic chatbot function based on the knowledge base, but there are no evalution pipeline. 
+This implementation is premature. However, to demonstrate the difference between the agentic AI approach and conditional flow LLM pipeline, we include the chatbot version implemented by CrewAI. It provides basic chatbot functionality based on the knowledge base, but there is no evaluation pipeline.
 
 - **Core Components**:
   - Multi-agent System
@@ -60,12 +60,12 @@ pip install -r requirements.txt
 ```
 
 3. Environment Configuration:
-Copy env_example to `.env` file and update the api keys.
-`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY` is used only for the evaluation
+Copy env_example to `.env` file and update the API keys.
+`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY` are used only for evaluation
 dataset generation and chatbot response evaluation.
 
 4. Install and download open-source LLMs:
-Here, we use ollama for the local LLM provider with open-source LLMs. 
+Here, we use Ollama for the local LLM provider with open-source LLMs. 
 For the setup, please check [this document](docs/ollama_installation.md)
 
 ## Usage
@@ -111,9 +111,9 @@ Chatbot Score Viewer - The chatbot response viewer with LLM Judge score
 
 ## Evaluation Framework
 
-We developed a tool to evaluate the chat-bot performance so that the continuous improvement can be possible. The initial step is to clean up the information for the knowledge base. We are using the seminal paper "Human Breast Cancer: Correlation of Relapse and Survival with Amplification of the HER-2/neu Oncogene" You can find the details how to preprocess the PDF [here](knowledge/README.md) 
+We developed a tool to evaluate the chatbot performance so that continuous improvement can be possible. The initial step is to clean up the information for the knowledge base. We are using the seminal paper "Human Breast Cancer: Correlation of Relapse and Survival with Amplification of the HER-2/neu Oncogene". You can find the details of how to preprocess the PDF [here](knowledge/README.md).
 
-And here are the three main metrics for the evaluation. Check marks are implemented items and the empty item is for future works. 
+And here are the three main metrics for the evaluation. Check marks indicate implemented items and empty items are for future work.
 
 ### 1. Response Quality Metrics
 - [x] Relevance: Semantic alignment with query intent
@@ -140,7 +140,7 @@ We have conducted extensive evaluation of various open-source LLM models across 
 
 Detailed performance analysis and methodology can be found in [Open Source Model Performance](docs/opensource_model_performance.md).
 
-By continously updating the prompts and measuring the metric improvement, we can improve the chatbot system incrementally. You can find the details of the continous developement [here](docs/continous_development.md)
+By continuously updating the prompts and measuring the metric improvement, we can improve the chatbot system incrementally. You can find the details of the continuous development [here](docs/continous_development.md)
 
 ### Key Findings:
 
@@ -162,23 +162,22 @@ By continously updating the prompts and measuring the metric improvement, we can
 
 ### Integration of the Unified Clinical Vocabulary Embeddings
 
-From the publication [1](knowledge/johnson2024.pdf), we can expand our chatbot to handle the multiple knowlege base documents with better precision. 
+From the [publication](knowledge/johnson2024.pdf), we can expand our chatbot to handle multiple knowledge base documents with better precision.
 
-**Three insight from the paper:**
-1. The typical embeddings used by the current AI fields such as OpenAI, Voyage embeddings can not capture the medical meanings and relationships between the medical concepts. 
-1. In the paper, they trained the graph network based transformer model and generate the latent embeddings through self-supervised learning to overcome the current embedding methods in clinical domain. 
-1. this embedding can also solve two major challenges in the field; one the personal information issue and the incompatibility between the medical instititues. 
+**Three insights from the paper:**
+1. The typical embeddings used by the current AI fields, such as OpenAI and Voyage embeddings, cannot capture the medical meanings and relationships between medical concepts.
+2. In the paper, they trained a graph network-based transformer model and generated latent embeddings through self-supervised learning to overcome the current embedding methods in the clinical domain.
+3. This embedding can also solve two major challenges in the field: the personal information issue and the incompatibility between medical institutions.
 
 **Importance to the insurance company:**
-The last point of the insight is critical to the commercial insurance company. The privacy of the patient information is critical and the chatbot system does not allow the inputs of the individual medical information. However, this medical embeddings does not use the patient's information during the training process and we can keep the patient's data securaly. As mentioned in the publication, this embeddings still have correlation between the medical concepts and disease types. The chatbot based on this embedding can provide the precision medicine and personalized assistance. 
+The last point of the insight is critical to the commercial insurance company. The privacy of patient information is critical, and the chatbot system does not allow the input of individual medical information. However, these medical embeddings do not use the patient's information during the training process, and we can keep the patient's data secure. As mentioned in the publication, these embeddings still have correlation between medical concepts and disease types. The chatbot based on these embeddings can provide precision medicine and personalized assistance.
 
 **Application to the chatbot:**
-One of the limitation of our current chatbot is that the knowledge base is a single publication. To expand multiple papers with scalable services, we need to implement the effiecient retrieval system. Currently, we use FAISS with huggingface embeddings over the whole contents of the single paper. 
+One of the limitations of our current chatbot is that the knowledge base is a single publication. To expand to multiple papers with scalable services, we need to implement an efficient retrieval system. Currently, we use FAISS with Hugging Face embeddings over the whole chunks of the single paper.
 
-We can implement two levels of retrieval system. One is the paper-level embedding match and the other one is the chunk-level embedding match. By applying the unified clinical vocabulary embeddings (UCVE) to each paper, we can find the embeddings. And using the additive property of the embeddings, we can create a single final embedding for the paper. By checking the cosine similarity between the query embedding and paper-level embeddings, we can find the relavant top k (k=2 or 3) papers. Then we can use the typical embeddings from the chunks from those papers. The seconds method is to create cohort of chunks from the all knowledge papers and get the UCVE embeddings for the chunks. Then we can find the relavant chunks by similarity search between the query and the chunk DB. 
+We can implement two levels of retrieval system. One is the paper-level embedding match, and the other is the chunk-level embedding match. By applying the unified clinical vocabulary embeddings (UCVE) to each paper, we can find the embeddings. Using the additive property of the embeddings, we can create a single final embedding for the paper. By checking the cosine similarity between the query embedding and paper-level embeddings, we can find the relevant top k (k=2 or 3) papers. Then we can use the typical embeddings from the chunks from those papers. The second method is to create a cohort of chunks from all knowledge papers and get the UCVE embeddings for the chunks. Then we can find the relevant chunks by similarity search between the query and the chunk DB.
 
-The first approach is more scalable to the large collection of the papers, but it has lower accuracy or noiser embedding matching. The second approach need huge vector database system and slower response time, but it can provide the more relavant knowledge to the query. 
-
+The first approach is more scalable to large collections of papers, but it has lower accuracy or noisier embedding matching. The second approach needs a huge vector database system and has slower response time, but it can provide more relevant knowledge to the query.
 
 ## Development Guidelines
 
