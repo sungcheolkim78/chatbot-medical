@@ -160,27 +160,55 @@ By continuously updating the prompts and measuring the metric improvement, we ca
 
 ## Future Works
 
-### Integration of the Unified Clinical Vocabulary Embeddings
+### Integration of Unified Clinical Vocabulary Embeddings (UCVE)
 
-From the [publication](knowledge/johnson2024.pdf), we can expand our chatbot to handle multiple knowledge base documents with better precision.
+Based on the methodology presented in [Johnson et al. (2024)](knowledge/johnson2024.pdf), we propose an enhancement to our chatbot system's knowledge retrieval capabilities through the implementation of domain-specific embeddings.
 
-**Three insights from the paper:**
+**Key Technical Insights:**
 
-1. The typical embeddings used by the current AI fields, such as OpenAI and Voyage embeddings, cannot capture the medical meanings and relationships between medical concepts.
-2. In the paper, they trained a graph network-based transformer model and generated latent embeddings through self-supervised learning to overcome the current embedding methods in the clinical domain.
-3. This embedding can also solve two major challenges in the field: the personal information issue and the incompatibility between medical institutions.
+1. Current embedding methodologies (e.g., OpenAI, Voyage) demonstrate suboptimal performance in capturing medical semantic relationships and concept hierarchies.
+2. The proposed solution implements a graph network-based transformer architecture with self-supervised learning to generate latent embeddings specifically optimized for clinical terminology.
+3. The architecture addresses two critical challenges: data privacy preservation and cross-institutional semantic interoperability.
 
-**Importance to the insurance company:**
+**Business Value for Healthcare Insurance:**
 
-The last point of the insight is critical to the commercial insurance company. The privacy of patient information is critical, and the chatbot system does not allow the input of individual medical information. However, these medical embeddings do not use the patient's information during the training process, and we can keep the patient's data secure. As mentioned in the publication, these embeddings still have correlation between medical concepts and disease types. The chatbot based on these embeddings can provide precision medicine and personalized assistance.
+The implementation of UCVE provides significant advantages for healthcare insurance operations:
 
-**Application to the chatbot:**
+1. **Privacy Preservation:**
+   - Secure handling of patient data through embedding-based semantic matching
+   - No requirement for direct patient information in the training process
+   - Compliance with healthcare data protection regulations
 
-One of the limitations of our current chatbot is that the knowledge base is a single publication. To expand to multiple papers with scalable services, we need to implement an efficient retrieval system. Currently, we use FAISS with Hugging Face embeddings over the whole chunks of the single paper.
+2. **Clinical Precision:**
+   - Enhanced correlation mapping between medical concepts and disease types
+   - Improved accuracy in medical information retrieval
+   - Support for precision medicine applications
 
-We can implement two levels of retrieval system. One is the paper-level embedding match, and the other is the chunk-level embedding match. By applying the unified clinical vocabulary embeddings (UCVE) to each paper, we can find the embeddings. Using the additive property of the embeddings, we can create a single final embedding for the paper. By checking the cosine similarity between the query embedding and paper-level embeddings, we can find the relevant top k (k=2 or 3) papers. Then we can use the typical embeddings from the chunks from those papers. The second method is to create a cohort of chunks from all knowledge papers and get the UCVE embeddings for the chunks. Then we can find the relevant chunks by similarity search between the query and the chunk DB.
+3. **Operational Efficiency:**
+   - Cross-institutional semantic interoperability
+   - Standardized medical terminology processing
+   - Reduced manual intervention in claims processing
 
-The first approach is more scalable to large collections of papers, but it has lower accuracy or noisier embedding matching. The second approach needs a huge vector database system and has slower response time, but it can provide more relevant knowledge to the query.
+**Technical Implementation Considerations:**
+
+The current system's limitation of single-document knowledge base can be addressed through a hierarchical retrieval architecture. Presently, we utilize FAISS with Hugging Face embeddings for chunk-level semantic search within a single document.
+
+**Proposed Two-Tier Retrieval Architecture:**
+
+1. **Document-Level Retrieval:**
+   - Implementation of UCVE at the document level
+   - Utilization of embedding additive properties for document representation
+   - Cosine similarity-based retrieval of top-k (k ∈ {2,3}) relevant documents
+   - Subsequent chunk-level search within retrieved documents
+
+2. **Chunk-Level Retrieval:**
+   - Direct application of UCVE to document chunks
+   - Construction of a unified chunk database
+   - Query-chunk similarity computation for precise information retrieval
+
+**Performance Trade-offs:**
+
+The document-level approach offers superior scalability for large document collections but introduces potential noise in embedding matching. The chunk-level approach provides higher precision but requires significant vector database resources and exhibits higher latency.
 
 ## Development Guidelines
 
