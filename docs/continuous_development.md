@@ -1,5 +1,7 @@
 ## Data Collection Methods for Continuous Improvement
 
+![](figs/continuous_dev.svg)
+
 ### 1. Automated Data Collection
 - **System Logs**
   - Response times
