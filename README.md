@@ -103,22 +103,19 @@ make chatbot_crewai
 ## Screenshot of the web applications
 
 Chatbot (Langchain version) 
+
 : The main chatbot application
-<div align="center">
 ![](docs/figs/chatbot_langchain_screenshot.png)
-</div>
 
 Dataset Viewer 
+
 : The dataset viewer to validate the evaluation dataset with the source excerpts
-<div align="center">
 ![](docs/figs/eval_app_screenshot.png)
-</div>
 
 Chatbot Score Viewer 
+
 : The chatbot response viewer with LLM Judge score
-<div align="center">
 ![](docs/figs/eval_score_screenshot.png)
-</div>
 
 ## Evaluation Framework
 
