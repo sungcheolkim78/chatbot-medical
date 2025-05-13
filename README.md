@@ -1,6 +1,23 @@
 # Medical Chatbot
 
+[![Python Version](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Status](https://img.shields.io/badge/status-active-success)]()
+
 A medical domain-specific chatbot implementation with two distinct architectures: LangChain-based for evaluation and prompt engineering, and CrewAI-based for agentic AI demonstration. The system includes a comprehensive evaluation framework for assessing different LLM models and prompt configurations.
+
+## Table of Contents
+- [Project Requirements](#project-requirements)
+- [Architecture Overview](#architecture-overview)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+- [Evaluation Framework](#evaluation-framework)
+- [Model Performance Analysis](#model-performance-analysis)
+- [Future Works](#future-works)
+- [Development Guidelines](#development-guidelines)
+- [Contributing](#contributing)
+- [Contact](#contact)
 
 <div align="center">
 <img src="docs/figs/medical_chatbot.png" alt="Medical Chatbot Architecture" height="400px">
@@ -48,6 +65,14 @@ This implementation is premature. However, to demonstrate the difference between
   
 ## Installation
 
+### Prerequisites
+- Python 3.9 or higher
+- Git
+- Virtual environment (recommended)
+- Ollama (for local LLM support)
+
+### Setup Steps
+
 1. Clone and setup:
 ```bash
 git clone https://github.com/sungcheolkim78/chatbot-medical.git
@@ -62,13 +87,31 @@ pip install -r requirements.txt
 ```
 
 3. Environment Configuration:
-Copy env_example to `.env` file and update the API keys.
-`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY` are used only for evaluation
-dataset generation and chatbot response evaluation.
+Create a `.env` file by copying `env_example`:
+```bash
+cp env_example .env
+```
+Update the following API keys in `.env`:
+- `OPENAI_API_KEY`: For evaluation dataset generation
+- `ANTHROPIC_API_KEY`: For chatbot response evaluation
+- `GOOGLE_API_KEY`: For evaluation purposes
 
 4. Install and download open-source LLMs:
-Here, we use Ollama for the local LLM provider with open-source LLMs. 
 For the ollama and LLM setup, please check [this document](docs/ollama_installation.md)
+
+## Quick Start
+
+To get started quickly with the LangChain version:
+
+```bash
+# Activate virtual environment
+source .venv/bin/activate
+
+# Start the chatbot
+make chatbot_langchain
+```
+
+For more detailed usage instructions, see the [Usage](#usage) section below.
 
 ## Usage
 
@@ -183,32 +226,32 @@ The current chatbot system's single-document knowledge base presents a significa
 ### Code Structure
 ```
 medical_chatbot/
-├── src/
-│   ├── chatbot_langchain/
-│   │   ├── app.py
-│   │   ├── batch.py
-│   │   └── components/
-│   └── chatbot_crewai/
-│       ├── main.py
-│       ├── crew.py
-│       └── config/
-├── knowledge/
-│   ├── slamon1987.pdf
-│   └── slamon1987_claude.md
-├── evaluation/
-│   ├── configs/
-│   ├── chatbot_results/
-│   ├── datasets/
-│   ├── components/
-│   ├── dataset_generator.py
-│   ├── app_eval.py
-│   └── llm_scorer.py
-├── docs/
-│   ├── figs/
-│   └── README.md
-├── tests/
-├── README.md
-└── Makefile
+├── src/                      # Source code directory
+│   ├── chatbot_langchain/    # LangChain implementation
+│   │   ├── app.py            # Main application entry point
+│   │   ├── batch.py          # Batch processing utilities
+│   │   └── components/       # Core components and utilities
+│   └── chatbot_crewai/       # CrewAI implementation
+│       ├── main.py           # Main application entry point
+│       ├── crew.py           # Crew configuration
+│       └── config/           # Configuration files
+├── knowledge/                # Knowledge base directory
+│   ├── slamon1987.pdf        # Original research paper
+│   └── slamon1987_claude.md  # Processed knowledge base
+├── evaluation/               # Evaluation framework
+│   ├── configs/              # Evaluation configurations
+│   ├── chatbot_results/      # Evaluation results
+│   ├── datasets/             # Evaluation datasets
+│   ├── components/           # Evaluation components
+│   ├── dataset_generator.py  # Dataset generation utilities
+│   ├── app_eval.py           # Evaluation application
+│   └── llm_scorer.py         # LLM scoring utilities
+├── docs/                     # Documentation
+│   ├── figs/                 # Figures and diagrams
+│   └── README.md             # Documentation files
+├── tests/                    # Test suite
+├── README.md                 # Project documentation
+└── Makefile                  # Build and utility commands
 ```
 
 ## Contributing
