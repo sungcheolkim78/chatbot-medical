@@ -168,13 +168,13 @@ By continuously updating the prompts and measuring the metric improvement, we ca
 
 ## Future Works
 
-### Integration of Unified Clinical Vocabulary Embeddings (UCVE)
+### 1. Integration of Unified Clinical Vocabulary Embeddings (UCVE)
 
 The current chatbot system's single-document knowledge base presents a significant limitation in handling multiple medical publications effectively. To address this, we propose a hierarchical retrieval architecture that leverages Unified Clinical Vocabulary Embeddings (UCVE) through two distinct approaches: document-level and chunk-level retrieval methods. You can find the details [here](docs/unified_clinical_vocabulary_embeddings.md).
 
-### Prompt engineering through continuous evaluation pipeline
+### 2. Prompt engineering through continuous evaluation pipeline
 
-### Improving RAG system
+### 3. Improving RAG system
 
 - Try different LLM models
 - Try different vector database (Milvus, Weaviate, Qdrant, Chroma)
