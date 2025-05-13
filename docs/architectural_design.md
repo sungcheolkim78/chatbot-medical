@@ -10,7 +10,6 @@ The ChatEngine is a sophisticated conversational AI system built using LangChain
 classDiagram
     class ChatEngine {
         -messages: List[Dict[str, str]]
-        -conversation: Any
         -llm: ChatModel
         -document_loader: DocumentLoader
         -top_k: int
@@ -49,7 +48,8 @@ classDiagram
     subgraph GraphFlow
         direction LR
         query_or_respond --> tools
-        tools --> generate
+        query_or_respond --> generate
+        tools --> query_or_respond
         generate --> END
     end
 ```

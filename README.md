@@ -19,7 +19,7 @@ The details of the project requirements can be found [here](docs/project_require
   - Document Processing Pipeline
   - Vector Store Integration (FAISS)
   - Retrieval-Augmented Generation (RAG)
-  - Custom Chain Implementations
+  - Custom Chain Implementations (LangGraph)
   - Evaluation Framework
 
 - **Key Features**:

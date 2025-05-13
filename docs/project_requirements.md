@@ -1,8 +1,8 @@
 ## Problem statement
 
-We need to develop a Q/A chatbot prototype that can effectively address questions related to [this publication](slamon1987.pdf). This prototype should be implemented in Python using an open-source Large Language Model (LLM). Additionally, we require a comprehensive evaluation approach to assess the chatbot's performance.
+We need to develop a Q/A chatbot prototype that can effectively address questions related to [this publication](../knowledge/slamon1987.pdf). This prototype should be implemented in Python using an open-source Large Language Model (LLM). Additionally, we require a comprehensive evaluation approach to assess the chatbot's performance.
 
-Furthermore, review this research and answer the following questions:
+Furthermore, review [this research](../knowledge/johnson2024.pdf) and answer the following questions:
 1. What are the 3 takeaways for this research?
 2. How could this research be important for Humana?
 3. How can you include this research into your Q/A chatbot?
