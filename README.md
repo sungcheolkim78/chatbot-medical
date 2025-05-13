@@ -148,7 +148,7 @@ We have conducted extensive evaluation of various open-source LLM models across 
 
 Detailed performance analysis and methodology can be found in [Model Performance](docs/model_performance.md).
 
-By continuously updating the prompts and measuring the metric improvement, we can improve the chatbot system incrementally. You can find the details of the continuous development [here](docs/continous_development.md)
+By continuously updating the prompts and measuring the metric improvement, we can improve the chatbot system incrementally. You can find the details of the continuous development [here](docs/continuous_development.md)
 
 ### Key Findings:
 
@@ -170,7 +170,7 @@ By continuously updating the prompts and measuring the metric improvement, we ca
 
 ### 1. Integration of Unified Clinical Vocabulary Embeddings (ClinVec)
 
-The current chatbot system's single-document knowledge base presents a significant limitation in handling multiple medical publications effectively. To address this, we propose a hierarchical retrieval architecture that leverages Unified Clinical Vocabulary Embeddings (UCVE) through two distinct approaches: document-level and chunk-level retrieval methods. You can find the details [here](docs/clinvec.md).
+The current chatbot system's single-document knowledge base presents a significant limitation in handling multiple medical publications effectively. To address this, we propose a hierarchical retrieval architecture that leverages Unified Clinical Vocabulary Embeddings (ClinVec) through two distinct approaches: document-level and chunk-level retrieval methods. You can find the details [here](docs/clinvec.md).
 
 ### 2. Prompt engineering through continuous evaluation pipeline
 
@@ -178,7 +178,7 @@ The current chatbot system's single-document knowledge base presents a significa
 
 - Try different LLM models
 - Try different vector database (Milvus, Weaviate, Qdrant, Chroma)
-- Parameter tuning on chunk size and chunk overlap
+- Parameter tuning on chunk size, chunk overlap, and text split strategy
 
 ## Development Guidelines
 
@@ -207,8 +207,9 @@ medical_chatbot/
 │   └── llm_scorer.py
 ├── docs/
 │   ├── figs/
-│   └── opensource_model_performance.md
+│   └── README.md
 ├── tests/
+├── README.md
 └── Makefile
 ```
 
