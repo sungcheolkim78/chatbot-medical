@@ -1,4 +1,4 @@
-## Integration of Unified Clinical Vocabulary Embeddings (UCVE)
+## Integration of Unified Clinical Vocabulary Embeddings (ClinVec)
 
 Based on the methodology presented in [Johnson et al. (2024)](../knowledge/johnson2024.pdf), we propose an enhancement to our chatbot system's knowledge retrieval capabilities through the implementation of domain-specific embeddings.
 
