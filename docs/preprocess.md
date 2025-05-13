@@ -46,9 +46,9 @@ The multi-modal approach successfully:
 ## Repository Contents
 
 ### Files
-- `slamon1978.pdf`: Original publication
-- `slamon1987_short.pdf`: Condensed version (removed unnecessary pages)
-- `slamon1987_claude.md`: Extracted markdown content
+- `knowledge/slamon1978.pdf`: Original publication
+- `knowledge/slamon1987_short.pdf`: Condensed version (removed unnecessary pages)
+- `knowledge/slamon1987_claude.md`: Extracted markdown content
 
 ## Implementation Notes
 

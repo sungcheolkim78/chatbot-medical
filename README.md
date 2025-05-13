@@ -68,7 +68,7 @@ dataset generation and chatbot response evaluation.
 
 4. Install and download open-source LLMs:
 Here, we use Ollama for the local LLM provider with open-source LLMs. 
-For the setup, please check [this document](docs/ollama_installation.md)
+For the ollama and LLM setup, please check [this document](docs/ollama_installation.md)
 
 ## Usage
 
@@ -121,12 +121,12 @@ Chatbot Score Viewer
 
 We developed a tool to evaluate the chatbot performance so that continuous improvement can be possible. The initial step is to clean up the information for the knowledge base. We are using the seminal paper "Human Breast Cancer: Correlation of Relapse and Survival with Amplification of the HER-2/neu Oncogene". You can find the details of how to preprocess the PDF [here](docs/preprocess.md).
 
-And here are the three main metrics for the evaluation. Check marks indicate implemented items and empty items are for future work.
+And here are the three main metrics for the evaluation. Check marks indicate implemented items and empty items are for future work. Currently all these metrics are scored by the SOTA LLM (Gemini-2.5-flash) independently. Human in the loop can be implemented through the feedback. 
 
-### 1. Response Quality Metrics (Correctness)
-- [x] Relevance: Semantic alignment with query intent
-- [x] Coherence: Logical flow and consistency
+### 1. Factuality Metrics (Correctness)
 - [x] Accuracy: Factual correctness and precision
+- [x] Relevance: Semantic alignment with query intent
+- [x] Coherence: Logical flow and consistency with given knowledge base
 
 ### 2. Performance Metrics (Response Time)
 - [x] Response Time: Latency measurements
@@ -134,9 +134,9 @@ And here are the three main metrics for the evaluation. Check marks indicate imp
 - [ ] Error Rates: Failure analysis
 
 ### 3. User Experience Metrics (Style)
-- [ ] User Feedback: Structured feedback collection
 - [x] Friendliness and Engagement: Interaction quality
 - [x] Knowledge Adaptation: User expertise level handling
+- [ ] User Feedback: Structured feedback collection
 
 Detailed evaluation dataset generation and score calculation can be found [here](docs/evaluation.md)
 
@@ -146,7 +146,7 @@ We have conducted extensive evaluation of various open-source LLM models across 
 
 ![](docs/figs/metrics_boxplot_by_model_v1.png)
 
-Detailed performance analysis and methodology can be found in [Open Source Model Performance](docs/model_performance.md).
+Detailed performance analysis and methodology can be found in [Model Performance](docs/model_performance.md).
 
 By continuously updating the prompts and measuring the metric improvement, we can improve the chatbot system incrementally. You can find the details of the continuous development [here](docs/continous_development.md)
 

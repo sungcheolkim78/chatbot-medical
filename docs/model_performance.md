@@ -2,13 +2,15 @@
 
 ## Model Selection Criteria
 
-This evaluation framework focuses on open-source LLM models deployed through Ollama with tool capabilities. The selection criteria prioritized models that could run efficiently on consumer-grade hardware with less than 10GB VRAM, limiting the parameter size to 8B or smaller.
+This evaluation framework focuses on open-source LLM models deployed through Ollama with tool capabilities. The selection criteria prioritized models that could run efficiently on consumer-grade hardware with less than 10GB VRAM, limiting the parameter size to 8B or smaller. In the same logic, we selected `Q4_K_M` quantized models that saves the GPU memory and allow high speed.
 
 ### Evaluated Models
 - Llama 3.1 (8B parameters)
 - Llama 3.2 (3B parameters)
 - Granite 3.2 (2B and 8B parameters)
 - Qwen 3 (1.7B and 8B parameters)
+
+Note: Llama model is the baseline Open-source LLM model. Granite is chosen due to its high performance on the RAG system. Qwen model is selected due to the reasoning capability.
 
 ## Evaluation Metrics
 
@@ -50,4 +52,8 @@ The following table presents the quantitative comparison of model performance:
 
 The comparative performance metrics across models are visualized in the following boxplot:
 
-![](figs/metrics_boxplot_by_model.png)
+![](figs/metrics_boxplot_by_model_v1.png)
+
+After updating the LLM scoring prompt, the evaluation score were changed.
+
+![](figs/metrics_boxplot_by_model_v2.png)

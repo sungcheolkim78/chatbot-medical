@@ -17,7 +17,7 @@ eval_score_app:
 	streamlit run evaluation/app_response_viewer.py
 
 eval_dataset:
-	python evaluation/dataset_generator.py
+	python evaluation/dataset_generator.py --num-questions 2
 
 eval_batch:
 	python src/chatbot_langchain/batch.py --config evaluation/configs/batch_config_granite1.yaml

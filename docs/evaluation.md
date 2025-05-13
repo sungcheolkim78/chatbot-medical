@@ -6,9 +6,11 @@ This document outlines the technical implementation and workflow for evaluating 
 
 ### 1. PDF Processing
 - Input: PDF documents containing domain-specific knowledge
-- Processing: Utilizes PDF loaders (PyPDF2, PDFMiner, or Unstructured) for text extraction
+- Processing: 
+    - Utilizes PDF loaders (PyPDF2, PDFMiner, or Unstructured) for text extraction
+    - Utilizes multi-modal LLM model (claude-3.7-sonnet) for text extraction
 - Output: Structured text content with preserved formatting and metadata
-- Reference: See [knowledge processing documentation](../knowledge/README.md) for detailed implementation
+- Reference: See [knowledge processing documentation](preprocess.md) for detailed implementation
 
 ### 2. Text Chunking
 - Input: Processed text content from PDF
