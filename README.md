@@ -123,6 +123,8 @@ We developed a tool to evaluate the chatbot performance so that continuous impro
 
 And here are the three main metrics for the evaluation. Check marks indicate implemented items and empty items are for future work. Currently all these metrics are scored by the SOTA LLM (Gemini-2.5-flash) independently. Human in the loop can be implemented through the feedback. Detailed evaluation dataset generation and score calculation can be found [here](docs/evaluation.md)
 
+By continuously updating the prompts and measuring the metric improvement, we can improve the chatbot system incrementally. You can find the details of the continuous development [here](docs/continuous_development.md)
+
 ### 1. Factuality Metrics (Correctness)
 - [x] Accuracy: Factual correctness and precision
 - [x] Relevance: Semantic alignment with query intent
@@ -145,8 +147,6 @@ We have conducted extensive evaluation of various open-source LLM models across 
 ![](docs/figs/metrics_boxplot_by_model_v1.png)
 
 Detailed performance analysis and methodology can be found in [Model Performance](docs/model_performance.md).
-
-By continuously updating the prompts and measuring the metric improvement, we can improve the chatbot system incrementally. You can find the details of the continuous development [here](docs/continuous_development.md)
 
 ### Key Findings:
 
