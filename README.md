@@ -33,7 +33,7 @@ The details of the project requirements can be found [here](docs/project_require
 ### 1. LangChain Implementation
 
 - **Core Components**:
-  - Document Processing Pipeline
+  - Document Processing Pipeline (Docling, VLM)
   - Vector Store Integration (FAISS)
   - Retrieval-Augmented Generation (RAG)
   - Custom Chain Implementations (LangGraph)
@@ -53,8 +53,8 @@ The details of the architectural design can be found [here](docs/architectural_d
 This implementation is premature. However, to demonstrate the difference between the agentic AI approach and conditional flow LLM pipeline, we include the chatbot version implemented by CrewAI. It provides basic chatbot functionality based on the knowledge base, but there is no evaluation pipeline.
 
 - **Core Components**:
-  - Multi-agent System
-  - Task Orchestration
+  - Multi-agent System (Researcher, Assistant)
+  - Task Orchestration (research_task, chat_task)
   - Role-based Specialization
   - Inter-agent Communication
 
@@ -93,8 +93,10 @@ cp env_example .env
 ```
 Update the following API keys in `.env`:
 - `OPENAI_API_KEY`: For evaluation dataset generation
-- `ANTHROPIC_API_KEY`: For chatbot response evaluation
-- `GOOGLE_API_KEY`: For evaluation purposes
+- `ANTHROPIC_API_KEY`: For evaluation dataset generation
+- `GOOGLE_API_KEY`: For chatbot response evaluation purposes
+
+> **Note**: These API keys are only required for the evaluation framework and dataset generation. The main chatbot implementation uses open-source models through Ollama, making it possible to run the system without any external API dependencies.
 
 4. Install and download open-source LLMs:
 For the ollama and LLM setup, please check [this document](docs/ollama_installation.md)
@@ -162,7 +164,7 @@ Chatbot Score Viewer
 
 ## Evaluation Framework
 
-We developed a tool to evaluate the chatbot performance so that continuous improvement can be possible. The initial step is to clean up the information for the knowledge base. We are using the seminal paper "Human Breast Cancer: Correlation of Relapse and Survival with Amplification of the HER-2/neu Oncogene". You can find the details of how to preprocess the PDF [here](docs/preprocess.md).
+To enable continuous improvement of the chatbot, we've developed a comprehensive evaluation framework. The framework is built on a carefully curated knowledge base from the seminal paper "Human Breast Cancer: Correlation of Relapse and Survival with Amplification of the HER-2/neu Oncogene". This focused domain allows us to establish clear benchmarks and measure performance improvements. For details on how we process and prepare this knowledge base, see our [preprocessing guide](docs/preprocess.md).
 
 And here are the three main metrics for the evaluation. Check marks indicate implemented items and empty items are for future work. Currently all these metrics are scored by the SOTA LLM (Gemini-2.5-flash) independently. Human in the loop can be implemented through the feedback. Detailed evaluation dataset generation and score calculation can be found [here](docs/evaluation.md)
 
@@ -193,19 +195,21 @@ Detailed performance analysis and methodology can be found in [Model Performance
 
 ### Key Findings:
 
-1. Factuality Check
-   - Response Quality and Correctness based on the base LLM models and prompt engineering
-   - Error Patterns
+1. Model Performance Analysis
+   - Llama 3.1 (8B) showed the best overall performance in factuality and response quality
+   - Qwen models demonstrated superior reasoning capabilities, particularly in complex medical queries
+   - Smaller models (2-3B parameters) showed acceptable performance for basic queries but struggled with complex medical reasoning
+   - Response times were consistently under 15 seconds across all models, with optimal performance under 0.1 seconds
 
 2. Prompt Engineering Impact
-   - Template Effectiveness
-   - Context Utilization
-   - Response Consistency
+   - Custom medical domain prompts significantly improved factuality scores
+   - Chain-of-thought prompting enhanced reasoning capabilities, especially in Qwen models
+   - Context window optimization was crucial for handling complex medical queries
+   - Response formatting templates improved consistency in medical information presentation
 
 3. System Architecture Considerations
-   - Latency Analysis
-   - Scalability
-   - Integration Complexity
+   - Q4_K_M quantization enabled efficient deployment on consumer hardware (<10GB VRAM)
+   - Batch processing capabilities maintained consistent performance under load
 
 ## Future Works
 
