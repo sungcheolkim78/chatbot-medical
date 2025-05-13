@@ -1,39 +1,45 @@
 # Open-Source LLM Model Evaluation Framework
 
+## Overview
+This framework evaluates open-source LLM models deployed through Ollama with tool capabilities. Our primary focus is on models that can run efficiently on consumer-grade hardware while maintaining strong performance.
+
 ## Model Selection Criteria
+To ensure practical deployment, we established the following criteria:
+- Maximum parameter size: 8B or smaller
+- VRAM requirement: Less than 10GB
+- Model quantization: Q4_K_M format for optimal memory efficiency and speed
 
-This evaluation framework focuses on open-source LLM models deployed through Ollama with tool capabilities. The selection criteria prioritized models that could run efficiently on consumer-grade hardware with less than 10GB VRAM, limiting the parameter size to 8B or smaller. In the same logic, we selected `Q4_K_M` quantized models that saves the GPU memory and allow high speed.
+### Selected Models
+We evaluated the following models based on their unique strengths:
 
-### Evaluated Models
-- Llama 3.1 (8B parameters)
-- Llama 3.2 (3B parameters)
-- Granite 3.2 (2B and 8B parameters)
-- Qwen 3 (1.7B and 8B parameters)
+| Model | Parameter Size | Selection Rationale |
+|-------|---------------|-------------------|
+| Llama 3.1 | 8B | Baseline open-source LLM |
+| Llama 3.2 | 3B | Efficient baseline variant |
+| Granite 3.2 | 2B, 8B | High RAG system performance |
+| Qwen 3 | 1.7B, 8B | Strong reasoning capabilities |
 
-Note: Llama model is the baseline Open-source LLM model. Granite is chosen due to its high performance on the RAG system. Qwen model is selected due to the reasoning capability.
+## Evaluation Framework
 
-## Evaluation Metrics
+### Key Performance Indicators (KPIs)
+We assess model performance across three primary dimensions:
 
-The framework employs three primary Key Performance Indicators (KPIs):
+1. **Factuality Score**
+   - Measures response accuracy against ground truth
+   - Uses annotated question-answer pairs
+   - Categorizes by knowledge complexity (easy, medium, hard)
 
-1. **Factuality Score**: Measures the accuracy of model responses against ground truth
-2. **Performance Score**: Evaluates response quality and relevance
-3. **User Experience Score**: Assesses the overall interaction quality
+2. **Performance Score**
+   - Evaluates response quality and relevance
+   - Assesses conversation quality and interaction patterns
+   - Uses external evaluation via state-of-the-art LLM
 
-### Accuracy Assessment
-- Dataset: Annotated question-answer pairs categorized by knowledge complexity (easy, medium, hard)
-- Methodology: Automated evaluation of model responses against ground truth annotations
-
-### User Experience Evaluation
-- Methodology: External evaluation using a state-of-the-art (SOTA) LLM
-- Focus: Assessment of conversation quality and interaction patterns
-
-### Response Time Analysis
-- Measurement: End-to-end latency from query input to response generation
-- Normalization: 
-  - Optimal response time (0.1s) mapped to score 1.0
-  - Maximum acceptable response time (10s) mapped to score 0.0
-  - Linear interpolation for intermediate values
+3. **User Experience Score**
+   - Measures end-to-end response latency
+   - Scoring scale:
+     - 1.0: Optimal response time (0.1s)
+     - 0.0: Maximum acceptable time (15s)
+     - Linear interpolation for intermediate values
 
 ## Performance Comparison
 
