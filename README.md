@@ -196,20 +196,20 @@ Detailed performance analysis and methodology can be found in [Model Performance
 ### Key Findings:
 
 1. Model Performance Analysis
-   - Llama 3.1 (8B) showed the best overall performance in factuality and response quality
-   - Qwen models demonstrated superior reasoning capabilities, particularly in complex medical queries
-   - Smaller models (2-3B parameters) showed acceptable performance for basic queries but struggled with complex medical reasoning
-   - Response times were consistently under 15 seconds across all models, with optimal performance under 0.1 seconds
+   - Llama 3.1 (8B) achieved highest correctness (0.72) with balanced style (0.67)
+   - Qwen 3 (8B) showed strong reasoning (0.46 correctness) and excellent style (0.92)
+   - Smaller models (2-3B) maintained good response times (0.87-0.65) but lower correctness
+   - All models met performance targets with response times between 0.1-15 seconds
 
 2. Prompt Engineering Impact
-   - Custom medical domain prompts significantly improved factuality scores
-   - Chain-of-thought prompting enhanced reasoning capabilities, especially in Qwen models
-   - Context window optimization was crucial for handling complex medical queries
-   - Response formatting templates improved consistency in medical information presentation
+   - Custom medical domain prompts improved factuality scores across all models
+   - Chain-of-thought prompting enhanced reasoning, particularly in Qwen models
+   - Context window optimization improved handling of complex medical queries
+   - Response templates standardized medical information presentation
 
 3. System Architecture Considerations
-   - Q4_K_M quantization enabled efficient deployment on consumer hardware (<10GB VRAM)
-   - Batch processing capabilities maintained consistent performance under load
+   - Q4_K_M quantization enabled deployment on consumer hardware (<10GB VRAM)
+   - Batch processing maintained consistent performance under load
 
 ## Future Works
 

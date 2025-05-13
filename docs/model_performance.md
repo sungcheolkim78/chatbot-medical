@@ -29,12 +29,12 @@ We assess model performance across three primary dimensions:
    - Uses annotated question-answer pairs
    - Categorizes by knowledge complexity (easy, medium, hard)
 
-2. **Performance Score**
+2. **User Experience Score**
    - Evaluates response quality and relevance
    - Assesses conversation quality and interaction patterns
    - Uses external evaluation via state-of-the-art LLM
 
-3. **User Experience Score**
+3. **Performance Score**
    - Measures end-to-end response latency
    - Scoring scale:
      - 1.0: Optimal response time (0.1s)
