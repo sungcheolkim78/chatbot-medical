@@ -18,7 +18,8 @@ def format_timestamp(timestamp):
     try:
         dt = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
         return dt.strftime("%Y-%m-%d %H:%M:%S")
-    except:
+    except Exception as e:
+        st.error(f"Error formatting timestamp: {e}")
         return timestamp
 
 

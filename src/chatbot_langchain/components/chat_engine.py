@@ -4,11 +4,12 @@ Chat engine module for handling conversations and response generation.
 
 from langchain.chat_models import init_chat_model
 from langgraph.graph import MessagesState, StateGraph, END
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Tuple
 from langchain_core.messages import SystemMessage
 from langgraph.prebuilt import ToolNode, tools_condition
 from langchain.tools import StructuredTool
-from langgraph.checkpoint.memory import MemorySaver, InMemorySaver
+# TODO: we can use other checkpoint strategies - MemorySaver
+from langgraph.checkpoint.memory import InMemorySaver
 import time
 
 from .document_loader import DocumentLoader

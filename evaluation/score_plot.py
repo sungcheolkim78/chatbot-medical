@@ -2,7 +2,6 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import glob
-import os
 
 # Read all CSV files that start with llm_score
 csv_files = glob.glob("evaluation/chatbot_results/llm_score_*.csv")

@@ -17,11 +17,9 @@ import csv
 import logging
 import yaml
 from abc import ABC, abstractmethod
-from datetime import datetime
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, Any, List, Protocol
-from dataclasses import dataclass
 
 from components import LLMManager, check_api_keys, LLMType, setup_logging
 
@@ -225,10 +223,12 @@ class LLMScorer:
                     try:
                         scores.append(future.result())
                     except Exception as e:
+                        response_data = future_to_response[future]
                         logging.error(f"Error processing response: {e}")
                         scores.append(self._create_default_score(response_data))
         else:
             logging.info("Starting sequential scoring")
+            response_data = None
             for i, response_data in enumerate(responses, 1):
                 self._notify_observers(i, len(responses))
                 try:

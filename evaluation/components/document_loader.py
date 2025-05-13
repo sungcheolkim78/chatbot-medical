@@ -8,7 +8,6 @@ import os
 import pickle
 from pathlib import Path
 from typing import List, Optional, Protocol
-from abc import ABC, abstractmethod
 
 from langchain_docling import DoclingLoader
 from langchain_unstructured import UnstructuredLoader

@@ -13,10 +13,9 @@ will answer questions based on the content of the files in the folder.
 The API keys are loaded from load_dotenv() and the .env file is in the root of the project.
 """
 
-import os
 import streamlit as st
 from dotenv import load_dotenv
-from components.llm_config import get_llm_config, get_llm
+from components.llm_config import get_llm_config
 from components.chat_engine import ChatEngine
 from components.gui_handler import GUIHandler
 
