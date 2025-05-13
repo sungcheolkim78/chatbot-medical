@@ -8,6 +8,7 @@ from typing import List, Dict, Tuple
 from langchain_core.messages import SystemMessage
 from langgraph.prebuilt import ToolNode, tools_condition
 from langchain.tools import StructuredTool
+
 # TODO: we can use other checkpoint strategies - MemorySaver
 from langgraph.checkpoint.memory import InMemorySaver
 import time
@@ -148,8 +149,7 @@ class ChatEngine:
 
         start_time = time.time()
         msg = self.graph.invoke(
-            {"messages": [{"role": "user", "content": prompt}]}, 
-            config=self.config
+            {"messages": [{"role": "user", "content": prompt}]}, config=self.config
         )
         end_time = time.time()
         response_time = end_time - start_time
