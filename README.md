@@ -121,7 +121,7 @@ Chatbot Score Viewer
 
 We developed a tool to evaluate the chatbot performance so that continuous improvement can be possible. The initial step is to clean up the information for the knowledge base. We are using the seminal paper "Human Breast Cancer: Correlation of Relapse and Survival with Amplification of the HER-2/neu Oncogene". You can find the details of how to preprocess the PDF [here](docs/preprocess.md).
 
-And here are the three main metrics for the evaluation. Check marks indicate implemented items and empty items are for future work. Currently all these metrics are scored by the SOTA LLM (Gemini-2.5-flash) independently. Human in the loop can be implemented through the feedback. 
+And here are the three main metrics for the evaluation. Check marks indicate implemented items and empty items are for future work. Currently all these metrics are scored by the SOTA LLM (Gemini-2.5-flash) independently. Human in the loop can be implemented through the feedback. Detailed evaluation dataset generation and score calculation can be found [here](docs/evaluation.md)
 
 ### 1. Factuality Metrics (Correctness)
 - [x] Accuracy: Factual correctness and precision
@@ -137,8 +137,6 @@ And here are the three main metrics for the evaluation. Check marks indicate imp
 - [x] Friendliness and Engagement: Interaction quality
 - [x] Knowledge Adaptation: User expertise level handling
 - [ ] User Feedback: Structured feedback collection
-
-Detailed evaluation dataset generation and score calculation can be found [here](docs/evaluation.md)
 
 ## Model Performance Analysis
 
