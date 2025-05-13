@@ -1,4 +1,3 @@
-# Copyright 2025 Sungcheol Kim, All rights reserved.
 """
 Data models and enums for the dataset generator.
 """

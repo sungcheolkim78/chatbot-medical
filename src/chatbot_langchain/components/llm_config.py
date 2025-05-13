@@ -16,10 +16,9 @@ def get_llm_config():
         "Select a model provider:", ["Ollama", "OpenAI", "Anthropic", "Google Gemini"]
     )
 
-    ollama_models = [model.model for model in ollama.list().models]
-
     # Model selection based on provider
     if model_provider == "Ollama":
+        ollama_models = [model.model for model in ollama.list().models]
         model_name = st.selectbox("Select Ollama model:", ollama_models)
     elif model_provider == "OpenAI":
         model_name = st.selectbox("Select OpenAI model:", ["gpt-3.5-turbo", "gpt-4"])
@@ -44,7 +43,7 @@ def get_llm_config():
     # Text splitter configuration
     text_splitter_type = st.selectbox(
         "Select text splitter type:",
-        ["sentence_transformers_token", "recursive_character", "character"],
+        ["sentence_transformers_token", "recursive_character"],
         help="Choose how to split the document into chunks",
     )
 
@@ -71,6 +70,10 @@ def get_llm_config():
         if "slamon1987_claude.md" in knowledge_files
         else 0,
     )
+
+    # clear chat history
+    if st.button("Clear chat history"):
+        st.session_state.messages = []
 
     return (
         model_provider,

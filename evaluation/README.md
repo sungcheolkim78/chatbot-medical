@@ -45,13 +45,12 @@ This document outlines the technical implementation and workflow for evaluating 
 {
   "question": "string",
   "answer": "string",
-  "metadata": {
-    "difficulty": "easy|medium|hard",
-    "confidence": float,
-    "llm_provider": "openai|anthropic|google",
-    "source_chunk": "string",
-    "source_document": "string"
-  }
+  "source": "string",
+  "full_context": "string",
+  "difficulty": "easy|medium|hard",
+  "confidence": float,
+  "llm_type": "openai|anthropic|google",
+  "timestamp": "string"
 }
 ```
 

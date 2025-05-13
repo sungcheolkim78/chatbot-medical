@@ -145,7 +145,7 @@ def main(config):
                 results.append(result)
 
             except Exception as e:
-                print(f"Error processing question: {e}")
+                logging.error(f"Error processing question: {e}")
                 continue
 
         # Save results

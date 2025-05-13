@@ -15,6 +15,9 @@ class GUIHandler:
         self.chat_column = chat_column
         self.right_column = right_column
 
+        if "messages" not in st.session_state:
+            st.session_state.messages = []
+
     def render_header(self):
         """Render the header in the chat column."""
         with self.chat_column:
@@ -50,9 +53,9 @@ class GUIHandler:
     def render_chat_messages(self, chat_engine: ChatEngine):
         """Render the chat messages."""
         with self.chat_column:
-            for message in chat_engine.get_messages():
+            for message in st.session_state.messages:
                 with st.chat_message(message["role"]):
-                    st.write(message["content"])
+                    st.markdown(message["content"])
 
     def render_chat_input(self, chat_engine: ChatEngine):
         """Render the chat input and handle user interaction."""
@@ -60,6 +63,7 @@ class GUIHandler:
             if prompt := st.chat_input("Ask something..."):
                 # Add user message to chat history
                 chat_engine.add_message("user", prompt)
+                st.session_state.messages.append({"role": "user", "content": prompt})
 
                 # Display user message
                 with st.chat_message("user"):
@@ -86,8 +90,10 @@ class GUIHandler:
 
                             # Display final answer
                             st.write(final_answer)
+                            st.session_state.messages.append({"role": "assistant", "content": final_answer})
                         else:
                             st.write(response)
+                            st.session_state.messages.append({"role": "assistant", "content": response})
 
                         st.caption(f"Response time: {response_time:.2f} seconds")
 

@@ -28,7 +28,8 @@ def main():
     st.set_page_config(page_title="Medical Chatbot", page_icon="💬", layout="wide")
 
     # Create columns for the layout
-    left_column, chat_column, right_column = st.columns([1, 4, 2])
+    left_column = st.sidebar
+    chat_column, right_column = st.columns([2, 1], border=False, vertical_alignment="top")
 
     # Initialize components
     gui = GUIHandler(left_column, chat_column, right_column)
@@ -58,9 +59,9 @@ def main():
     # Render UI components
     gui.render_header()
     gui.render_knowledge_base(selected_file)
+    gui.render_instructions()
     gui.render_chat_messages(chat_engine)
     gui.render_chat_input(chat_engine)
-    gui.render_instructions()
 
 
 if __name__ == "__main__":
