@@ -1,9 +1,14 @@
 """
-Batch processing of the chatbot
+Batch Chatbot Processing Utility
 
-With a given json file and a list of questions, the chatbot will answer questions.
-The answers are generated with a ChatEngine instance and the results and metadata
-are saved in a json file.
+This script processes a batch of questions using a chatbot engine, generating answers and saving results to a JSON file. It supports configurable settings and can repeat answer generation multiple times per question for robustness testing or sampling.
+
+Key Functions:
+- load_config: Load configuration from a YAML file.
+- load_dataset: Load questions from a JSON dataset.
+- save_results: Save results to a JSON file.
+- remove_think_tags: Remove <think>...</think> tags from generated answers.
+- main: Command-line entry point for batch processing with options for config and repeat count.
 """
 
 import os
@@ -122,31 +127,35 @@ def main(config):
         )
 
         # Process questions and generate answers
+        repeat = config_data["repeat"]
         results = []
-        for q in questions:
-            try:
-                # Generate answer using ChatEngine
-                answer, response_time = chat_engine.generate_response(q["question"])
+        for idx, q in enumerate(questions, start=1):
+            for repeat_id in range(1, repeat + 1):
+                try:
+                    # Generate answer using ChatEngine
+                    answer, response_time = chat_engine.generate_response(q["question"])
 
-                # Create result entry
-                result = {
-                    "question": q["question"],
-                    "answer": remove_think_tags(answer),
-                    "ground_truth": q["answer"],
-                    "source": q["source"],
-                    "difficulty": q["difficulty"],
-                    "confidence": q["confidence"],
-                    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                    "model_name": config_data["chat_model_name"],
-                    "model_provider": config_data["chat_model_provider"],
-                    "temperature": config_data["chat_temperature"],
-                    "response_time": response_time,
-                }
-                results.append(result)
+                    # Create result entry
+                    result = {
+                        "id": idx,
+                        "repeat_id": repeat_id,
+                        "question": q["question"],
+                        "answer": remove_think_tags(answer),
+                        "ground_truth": q["answer"],
+                        "source": q["source"],
+                        "difficulty": q["difficulty"],
+                        "confidence": q["confidence"],
+                        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                        "model_name": config_data["chat_model_name"],
+                        "model_provider": config_data["chat_model_provider"],
+                        "temperature": config_data["chat_temperature"],
+                        "response_time": response_time,
+                    }
+                    results.append(result)
 
-            except Exception as e:
-                logging.error(f"Error processing question: {e}")
-                continue
+                except Exception as e:
+                    logging.error(f"Error processing question: {e}")
+                    continue
 
         # Save results
         save_results(results, config_data["chatbot_results_path"])

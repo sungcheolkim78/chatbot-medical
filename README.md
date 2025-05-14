@@ -188,13 +188,13 @@ By continuously updating the prompts and measuring the metric improvement, we ca
 
 ## Model Performance Analysis
 
-We have conducted extensive evaluation of various open-source LLM models across multiple dimensions:
+We performed a comprehensive evaluation of multiple open-source LLM models across several key metrics: correctness, response time, and user experience. Error bars in the results represent the standard error calculated from three independent chatbot trials and 18 question/answer sets.
 
-![](docs/figs/metrics_boxplot_by_model_v1.png)
+![](docs/figs/metrics_boxplot_by_model_v3.png)
 
-Detailed performance analysis and methodology can be found in [Model Performance](docs/model_performance.md).
+A detailed description of the performance analysis and evaluation methodology is available in the Model Performance documentation.
 
-### Key Findings:
+### Conclusions:
 
 1. Model Performance Analysis
    - Llama 3.1 (8B) achieved highest correctness (0.72) with balanced style (0.67)
@@ -208,9 +208,7 @@ Detailed performance analysis and methodology can be found in [Model Performance
    - Context window optimization improved handling of complex medical queries
    - Response templates standardized medical information presentation
 
-3. System Architecture Considerations
-   - Q4_K_M quantization enabled deployment on consumer hardware (<10GB VRAM)
-   - Batch processing maintained consistent performance under load
+3. Best solution for the 
 
 ## Future Works
 

@@ -1,4 +1,6 @@
-# Main Streamlit application for the medical chatbot interface
+"""
+Main Streamlit application for the medical chatbot interface
+"""
 
 import streamlit as st
 from dotenv import load_dotenv

@@ -9,6 +9,7 @@ chat_text_splitter_type: sentence_transformers_token
 chat_top_k: 2
 knowledge_path: knowledge/slamon1987_claude.md
 chatbot_results_path: evaluation/chatbot_results/results_qwen3_8b.json
+repeat: 3
 
 # Scoring
 scoring_model_name: gemini-2.5-flash-preview-04-17

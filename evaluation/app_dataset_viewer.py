@@ -1,3 +1,7 @@
+"""
+Streamlit application for viewing the evaluation dataset
+"""
+
 import streamlit as st
 import json
 import os

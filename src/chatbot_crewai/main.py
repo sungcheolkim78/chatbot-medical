@@ -1,4 +1,7 @@
-#!/usr/bin/env python
+"""
+Main Streamlit application for the medical chatbot interface
+"""
+
 import sys
 import warnings
 import streamlit as st
