@@ -90,10 +90,14 @@ class GUIHandler:
 
                             # Display final answer
                             st.write(final_answer)
-                            st.session_state.messages.append({"role": "assistant", "content": final_answer})
+                            st.session_state.messages.append(
+                                {"role": "assistant", "content": final_answer}
+                            )
                         else:
                             st.write(response)
-                            st.session_state.messages.append({"role": "assistant", "content": response})
+                            st.session_state.messages.append(
+                                {"role": "assistant", "content": response}
+                            )
 
                         st.caption(f"Response time: {response_time:.2f} seconds")
 

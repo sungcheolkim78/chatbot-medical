@@ -5,7 +5,6 @@ import streamlit as st
 import time
 import os
 from datetime import datetime
-from typing import Dict, List, Optional
 from chatbot_crewai.crew import ChatbotEngine
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
@@ -19,6 +18,7 @@ EXAMPLE_QUESTIONS = [
     "What statistical method was used to evaluate the predictive power of prognostic factors in the study?",
 ]
 
+
 def initialize_session_state() -> None:
     """Initialize Streamlit session state variables."""
     if "messages" not in st.session_state:
@@ -26,9 +26,11 @@ def initialize_session_state() -> None:
     if "history" not in st.session_state:
         st.session_state.history = []
 
+
 def setup_page_config() -> None:
     """Configure the Streamlit page settings."""
     st.set_page_config(page_title="Medical Chatbot", page_icon="💬", layout="wide")
+
 
 def create_sidebar() -> None:
     """Create and handle the sidebar functionality."""
@@ -39,10 +41,11 @@ def create_sidebar() -> None:
             st.session_state.history = []
             st.rerun()
 
+
 def display_knowledge_base(file_name: str) -> None:
     """Display the knowledge base content in the right column."""
     st.markdown("### Knowledge Base")
-    
+
     if not file_name:
         st.warning("No knowledge file selected")
         return
@@ -63,6 +66,7 @@ def display_knowledge_base(file_name: str) -> None:
     except Exception as e:
         st.error(f"Error reading knowledge file: {str(e)}")
 
+
 def display_chat_interface() -> None:
     """Display the main chat interface."""
     st.title("Medical Chatbot")
@@ -72,11 +76,13 @@ def display_chat_interface() -> None:
     with st.expander("Example questions"):
         st.markdown("\n".join(f"- {q}" for q in EXAMPLE_QUESTIONS))
 
+
 def display_chat_history() -> None:
     """Display the chat message history."""
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
+
 
 def process_user_input(prompt: str) -> None:
     """Process user input and generate a response."""
@@ -96,7 +102,7 @@ def process_user_input(prompt: str) -> None:
             response = ChatbotEngine().crew().kickoff(inputs=inputs)
             end_time = time.time()
             response_time = end_time - start_time
-            
+
             st.markdown(response)
             st.caption(f"Response time: {response_time:.2f} seconds")
             st.session_state.history.append(f"User: {prompt}")
@@ -104,13 +110,16 @@ def process_user_input(prompt: str) -> None:
 
     st.session_state.messages.append({"role": "assistant", "content": response})
 
+
 def chat() -> None:
     """Main chat interface function."""
     setup_page_config()
     initialize_session_state()
     create_sidebar()
 
-    chat_column, right_column = st.columns([2, 1], border=False, vertical_alignment="top")
+    chat_column, right_column = st.columns(
+        [2, 1], border=False, vertical_alignment="top"
+    )
 
     with chat_column:
         display_chat_interface()
@@ -122,36 +131,33 @@ def chat() -> None:
     with right_column:
         display_knowledge_base(DEFAULT_KNOWLEDGE_FILE)
 
+
 def run() -> None:
     """Run the crew with default inputs."""
-    inputs = {
-        "topic": "AI LLMs",
-        "current_year": str(datetime.now().year)
-    }
+    inputs = {"topic": "AI LLMs", "current_year": str(datetime.now().year)}
 
     try:
         ChatbotEngine().crew().kickoff(inputs=inputs)
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
+
 def test() -> None:
     """Test the crew execution with specified iterations and evaluation LLM."""
     if len(sys.argv) < 3:
-        raise ValueError("Please provide number of iterations and evaluation LLM as arguments")
+        raise ValueError(
+            "Please provide number of iterations and evaluation LLM as arguments"
+        )
 
-    inputs = {
-        "topic": "AI LLMs",
-        "current_year": str(datetime.now().year)
-    }
+    inputs = {"topic": "AI LLMs", "current_year": str(datetime.now().year)}
 
     try:
         ChatbotEngine().crew().test(
-            n_iterations=int(sys.argv[1]),
-            eval_llm=sys.argv[2],
-            inputs=inputs
+            n_iterations=int(sys.argv[1]), eval_llm=sys.argv[2], inputs=inputs
         )
     except Exception as e:
         raise Exception(f"An error occurred while testing the crew: {e}")
+
 
 if __name__ == "__main__":
     chat()

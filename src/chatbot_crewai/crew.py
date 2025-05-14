@@ -1,4 +1,4 @@
-from crewai import Agent, Crew, Process, Task, LLM
+from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from crewai.memory import LongTermMemory
@@ -30,14 +30,14 @@ class ChatbotEngine:
     @agent
     def researcher(self) -> Agent:
         return Agent(
-            config=self.agents_config["researcher"], 
+            config=self.agents_config["researcher"],
             verbose=False,
         )
 
     @agent
     def assistant(self) -> Agent:
         return Agent(
-            config=self.agents_config["assistant"],  
+            config=self.agents_config["assistant"],
             verbose=False,
         )
 
@@ -65,7 +65,7 @@ class ChatbotEngine:
 
         return Crew(
             agents=self.agents,  # Automatically created by the @agent decorator
-            tasks=self.tasks,    # Automatically created by the @task decorator
+            tasks=self.tasks,  # Automatically created by the @task decorator
             process=Process.sequential,
             verbose=False,
             output_log_file=True,
@@ -74,5 +74,5 @@ class ChatbotEngine:
             memory=True,
             long_term_memory=LongTermMemory(
                 storage=LTMSQLiteStorage(db_path="./memory.db")
-            )
+            ),
         )

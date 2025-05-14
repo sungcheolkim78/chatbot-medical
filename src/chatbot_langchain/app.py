@@ -17,7 +17,9 @@ def main():
 
     # Create columns for the layout
     left_column = st.sidebar
-    chat_column, right_column = st.columns([2, 1], border=False, vertical_alignment="top")
+    chat_column, right_column = st.columns(
+        [2, 1], border=False, vertical_alignment="top"
+    )
 
     # Initialize components
     gui = GUIHandler(left_column, chat_column, right_column)
