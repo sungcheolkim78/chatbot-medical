@@ -7,29 +7,12 @@ research_task:
     A list with 10 bullet points of the most relevant information about {topic}
   agent: researcher
 
-reporting_task:
-  description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
-  expected_output: >
-    A fully fledged report with the main topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
-
-fact_check_task:
-  description: >
-    Verify all information in the response for accuracy and correctness. If possible, add
-    a source or excerpt from the source material to support the information.
-  expected_output: >
-    Verified response with any corrections or clarifications needed.
-  agent: fact_checker
-
 chat_task:
   description: >
     Use the conversation history to build your response to the user:
     {history}
     Respond to the user's message: {user_message},
-    Make sure to use the fact checker's output to ensure the information is accurate.
+    Make the response at maximum three paragraphs.
   expected_output: >
     Your output should be a relevant, accurate, and engaging response that directly 
     addresses the user's query or continues the conversation logically.

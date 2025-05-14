@@ -1,104 +1,78 @@
-from crewai import Agent, Crew, Process, Task
+from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
-from crewai.knowledge.source.pdf_knowledge_source import PDFKnowledgeSource
+from crewai.memory import LongTermMemory
+from crewai.memory.storage.ltm_sqlite_storage import LTMSQLiteStorage
+from datetime import datetime
+import time
+
+# Note: if you want to use pdf file directly, use PDFKnowledgeSource
+# from crewai.knowledge.source.pdf_knowledge_source import PDFKnowledgeSource
+from crewai.knowledge.source.crew_docling_source import CrewDoclingSource
+from crewai.knowledge.knowledge_config import KnowledgeConfig
 
 from typing import List
-# If you want to run a snippet of code before or after the crew starts,
-# you can use the @before_kickoff and @after_kickoff decorators
-# https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
 
 @CrewBase
-class ChatbotHumana:
-    """ChatbotHumana crew"""
+class ChatbotEngine:
+    """Chatbot Engine with CrewAI"""
 
     agents: List[BaseAgent]
     tasks: List[Task]
-    pdf_source = PDFKnowledgeSource(
-        file_paths=["slamon1987.pdf"],
+    knowledge_source = CrewDoclingSource(
+        file_paths=["slamon1987_claude.md"],
         chunk_size=4000,
         chunk_overlap=200,
     )
+    knowledge_config = KnowledgeConfig(results_limit=3, score_threshold=0.35)
 
-    # Learn more about YAML configuration files here:
-    # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
-    # Tasks: https://docs.crewai.com/concepts/tasks#yaml-configuration-recommended
-
-    # If you would like to add tools to your agents, you can learn more about it here:
-    # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
     def researcher(self) -> Agent:
         return Agent(
-            config=self.agents_config["researcher"],  # type: ignore[index]
-            verbose=False,
-        )
-
-    @agent
-    def reporting_analyst(self) -> Agent:
-        return Agent(
-            config=self.agents_config["reporting_analyst"],  # type: ignore[index]
-            knowledge_sources=[self.pdf_source],
-            verbose=False,
-        )
-
-    @agent
-    def fact_checker(self) -> Agent:
-        return Agent(
-            config=self.agents_config["fact_checker"],  # type: ignore[index]
-            knowledge_sources=[self.pdf_source],
+            config=self.agents_config["researcher"], 
             verbose=False,
         )
 
     @agent
     def assistant(self) -> Agent:
         return Agent(
-            config=self.agents_config["assistant"],  # type: ignore[index]
+            config=self.agents_config["assistant"],  
             verbose=False,
         )
 
-    # To learn more about structured task outputs,
-    # task dependencies, and task callbacks, check out the documentation:
-    # https://docs.crewai.com/concepts/tasks#overview-of-a-task
     @task
     def research_task(self) -> Task:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        response_time = int(time.time() * 1000)  # Current time in milliseconds
         return Task(
-            config=self.tasks_config["research_task"],  # type: ignore[index]
-            output_file="logs/research.md",
-        )
-
-    @task
-    def reporting_task(self) -> Task:
-        return Task(
-            config=self.tasks_config["reporting_task"],  # type: ignore[index]
-            output_file="logs/report.md",
-        )
-
-    @task
-    def fact_check_task(self) -> Task:
-        return Task(
-            config=self.tasks_config["fact_check_task"],  # type: ignore[index]
-            output_file="logs/fact_check.md",
+            config=self.tasks_config["research_task"],
+            output_file=f"logs/research_{timestamp}_{response_time}.md",
         )
 
     @task
     def chat_task(self) -> Task:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        response_time = int(time.time() * 1000)  # Current time in milliseconds
         return Task(
-            config=self.tasks_config["chat_task"],  # type: ignore[index]
-            output_file="logs/chat.md",
+            config=self.tasks_config["chat_task"],
+            output_file=f"logs/chat_{timestamp}_{response_time}.md",
         )
 
     @crew
     def crew(self) -> Crew:
-        """Creates the ChatbotHumana crew"""
-        # To learn how to add knowledge sources to your crew, check out the documentation:
-        # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
+        """Creates the crew for the chatbot"""
 
         return Crew(
             agents=self.agents,  # Automatically created by the @agent decorator
-            tasks=self.tasks,  # Automatically created by the @task decorator
+            tasks=self.tasks,    # Automatically created by the @task decorator
             process=Process.sequential,
             verbose=False,
-            # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
             output_log_file=True,
+            knowledge_sources=[self.knowledge_source],
+            knowledge_config=self.knowledge_config,
+            memory=True,
+            long_term_memory=LongTermMemory(
+                storage=LTMSQLiteStorage(db_path="./memory.db")
+            )
         )
