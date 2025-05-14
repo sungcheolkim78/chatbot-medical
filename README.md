@@ -61,7 +61,8 @@ This implementation is premature. However, to demonstrate the difference between
 - **Key Features**:
   - Agent-based conversation flow
   - Task delegation and coordination
-  - Specialized medical knowledge agents
+  - Specialized medical knowledge agents (CrewAI Knowledge)
+  - Usually takes long time for the final response (>20 seconds)
   
 ## Installation
 
@@ -224,6 +225,8 @@ The current chatbot system's single-document knowledge base presents a significa
 - Try different LLM models
 - Try different vector database (Milvus, Weaviate, Qdrant, Chroma)
 - Parameter tuning on chunk size, chunk overlap, and text split strategy
+
+### 4. Explore Agentic AI for research report generation
 
 ## Development Guidelines
 
