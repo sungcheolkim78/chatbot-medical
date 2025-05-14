@@ -4,9 +4,7 @@ Score plot for chatbot evaluation
 
 import pandas as pd
 import seaborn as sns
-import matplotlib.pyplot as plt
 import glob
-import numpy as np
 from typing import List
 from components import setup_logging
 import logging
@@ -14,7 +12,9 @@ import logging
 setup_logging()
 
 
-def load_llm_score_data(pattern: str = "evaluation/chatbot_results/llm_score_*.csv") -> pd.DataFrame:
+def load_llm_score_data(
+    pattern: str = "evaluation/chatbot_results/llm_score_*.csv",
+) -> pd.DataFrame:
     """Load and concatenate all LLM score CSVs matching the given pattern."""
     logging.info(f"Loading CSV files with pattern: {pattern}")
     csv_files = glob.glob(pattern)
@@ -33,7 +33,9 @@ def aggregate_scores(df: pd.DataFrame, metrics: List[str]) -> pd.DataFrame:
     1. Average metrics over repeat_id for each (id, model_name).
     2. Return melted DataFrame with columns: id, model_name, Metric, Score.
     """
-    logging.info("Aggregating scores: averaging over repeat_id and then melting by metric.")
+    logging.info(
+        "Aggregating scores: averaging over repeat_id and then melting by metric."
+    )
     df_avg_repeat = df.groupby(["id", "model_name"])[metrics].mean().reset_index()
     # df_avg_repeat.to_csv("evaluation/chatbot_results/metrics_mean_by_model_and_id.csv", index=False)
     # Melt the DataFrame
@@ -46,10 +48,13 @@ def aggregate_scores(df: pd.DataFrame, metrics: List[str]) -> pd.DataFrame:
     )
     # df_melted.to_csv("evaluation/chatbot_results/metrics_mean_by_model_and_id_melted.csv", index=False)
     df_melted = df_melted.sort_values("model_name")
+    df_melted.to_csv("evaluation/chatbot_results/metrics_melted.csv", index=False)
     return df_melted
 
 
-def plot_mean_with_stderr(results_df: pd.DataFrame, metrics: List[str], output_path: str):
+def plot_mean_with_stderr(
+    results_df: pd.DataFrame, metrics: List[str], output_path: str
+):
     """Plot mean with standard error bars for each metric and model, with correct alignment."""
 
     logging.info(f"Plotting mean with standard error. Output path: {output_path}")
@@ -79,7 +84,11 @@ def main():
     try:
         df = load_llm_score_data()
         results_df = aggregate_scores(df, metrics)
-        plot_mean_with_stderr(results_df, metrics, "evaluation/chatbot_results/metrics_mean_stderr_by_model.png")
+        plot_mean_with_stderr(
+            results_df,
+            metrics,
+            "evaluation/chatbot_results/metrics_mean_stderr_by_model.png",
+        )
         logging.info("Script completed successfully.")
     except Exception as e:
         logging.error(f"Script failed: {e}")

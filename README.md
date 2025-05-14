@@ -188,27 +188,37 @@ By continuously updating the prompts and measuring the metric improvement, we ca
 
 ## Model Performance Analysis
 
-We performed a comprehensive evaluation of multiple open-source LLM models across several key metrics: correctness, response time, and user experience. Error bars in the results represent the standard error calculated from three independent chatbot trials and 18 question/answer sets.
+We performed a comprehensive evaluation of multiple open-source LLM models across several key metrics: correctness, response time, and user experience. Error bars in the results represent the standard error calculated from three independent chatbot trials and 18 question/answer sets. A detailed description of the performance analysis and evaluation methodology is available in the [Model Performance](docs/model_performance.md) documentation.
 
 ![](docs/figs/metrics_boxplot_by_model_v3.png)
-
-A detailed description of the performance analysis and evaluation methodology is available in the Model Performance documentation.
 
 ### Conclusions:
 
 1. Model Performance Analysis
-   - Llama 3.1 (8B) achieved highest correctness (0.72) with balanced style (0.67)
-   - Qwen 3 (8B) showed strong reasoning (0.46 correctness) and excellent style (0.92)
-   - Smaller models (2-3B) maintained good response times (0.87-0.65) but lower correctness
+   - Llama 3.1 (8B) achieved highest correctness (0.72) with balanced style (0.67) and good response time (0.80)
+   - Qwen 3 (8B) showed strong reasoning (0.46 correctness) and excellent style (0.92) with moderate response time (0.40)
+   - Smaller models (2-3B) maintained good response times (0.87-0.65) but lower correctness (0.30-0.40)
    - All models met performance targets with response times between 0.1-15 seconds
 
-2. Prompt Engineering Impact
-   - Custom medical domain prompts improved factuality scores across all models
-   - Chain-of-thought prompting enhanced reasoning, particularly in Qwen models
-   - Context window optimization improved handling of complex medical queries
-   - Response templates standardized medical information presentation
+2. Performance Metrics Distribution
+   - Correctness: Larger models (8B) show more consistent and higher correctness scores
+   - Response Time: Smaller models (2-3B) show better response time performance (0.87-0.65)
+   - Style: Most models maintain good style scores (>0.65), with Qwen models showing highest consistency
 
-3. Best solution for the 
+3. Model Selection Recommendations
+   - For Optimal Performance (Recommended):
+     * Use Llama 3.1 (8B) for initial answer generation to ensure high accuracy
+     * Follow with Qwen 3 (8B) for response reformatting to enhance user experience
+     * This combination leverages Llama's high correctness (0.72) and Qwen's excellent style (0.92)
+   
+   - For Resource-Constrained Environments:
+     * Smaller models (2-3B) provide fastest response times (0.87-0.65)
+     * Suitable for applications where speed is critical
+     * Trade-off: Lower correctness scores (0.30-0.40)
+   
+   - For Single-Model Solutions:
+     * High Accuracy Focus: Llama 3.1 (8B) offers best correctness with balanced performance
+     * User Experience Focus: Qwen 3 (8B) provides excellent style with good overall performance
 
 ## Future Works
 
