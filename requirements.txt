@@ -12,3 +12,13 @@ python-dotenv
 click
 streamlit
 pandas
+ollama
+langchain_openai
+langchain_anthropic
+langchain_google_genai
+langgraph
+langchain_docling
+langchain_unstructured
+langchain_huggingface
+unstructured
+markdown
